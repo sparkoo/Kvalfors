@@ -4,7 +4,6 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Levels/LevelTemplate.gd" type="Script" id=3]
 
-
 [node name="LevelTemplate" type="Spatial" groups=[
 "game",
 ]]

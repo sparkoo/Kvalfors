@@ -51,3 +51,6 @@ script = SubResource( 4 )
 [node name="JumpBox3" parent="Obstacles" index="3" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, 7.14151 )
 script = SubResource( 4 )
+
+[node name="Player" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
