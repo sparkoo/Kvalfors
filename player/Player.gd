@@ -42,6 +42,7 @@ func _on_JumpSlideTimer_timeout():
 
 func hit():
 	dead = true
+	print("dead")
 	get_tree().call_group("game", "gameOver")
 
 

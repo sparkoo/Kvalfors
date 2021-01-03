@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://obstacles/JumpBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://obstacles/ObstacleJump.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/LevelTemplate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/gfx/Road007_1K_Color.png" type="Texture" id=3]
+[ext_resource path="res://obstacles/ObstacleSlide.tscn" type="PackedScene" id=4]
+[ext_resource path="res://obstacles/ObstacleBlock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/gfx/Road007_1K_Normal.png" type="Texture" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.203922, 0.203922, 0.211765, 1 )
 albedo_texture = ExtResource( 3 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 6 )
 uv1_scale = Vector3( 3.01, 21.062, 1 )
 
 [sub_resource type="PlaneMesh" id=2]
@@ -15,13 +21,6 @@ size = Vector2( 3, 200 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1.5, 0.1, 100 )
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Area
-
-func _on_ObstacleBox_body_entered(body):
-	get_tree().call_group(\"hittable\", \"hit\")
-"
 
 [node name="Level1" instance=ExtResource( 2 )]
 
@@ -36,21 +35,26 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
 shape = SubResource( 3 )
 
-[node name="JumpBox" parent="Obstacles" index="0" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.33913, 7.121 )
-script = SubResource( 4 )
+[node name="DirectionalLight" parent="Env" index="1"]
+transform = Transform( 1, 0, 0, 0, 0.798415, 0.602108, 0, -0.602108, 0.798415, 0, 4.1863, 0 )
 
-[node name="JumpBox4" parent="Obstacles" index="1" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.87065, 11.5686 )
-script = SubResource( 4 )
+[node name="ObstacleBlock" parent="Obstacles" index="0" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 28.138 )
 
-[node name="JumpBox2" parent="Obstacles" index="2" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.75, 11.5439 )
-script = SubResource( 4 )
+[node name="ObstacleBlock2" parent="Obstacles" index="1" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 28.138 )
 
-[node name="JumpBox3" parent="Obstacles" index="3" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, 7.14151 )
-script = SubResource( 4 )
+[node name="ObstacleBlock3" parent="Obstacles" index="2" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 44.2046 )
+
+[node name="ObstacleBlock4" parent="Obstacles" index="3" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 44.205 )
+
+[node name="ObstacleSlide" parent="Obstacles" index="4" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 9.70075 )
+
+[node name="ObstacleJump" parent="Obstacles" index="5" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 17.999 )
 
 [node name="Player" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )

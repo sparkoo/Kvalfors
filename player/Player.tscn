@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/PlayerMesh.tscn" type="PackedScene" id=2]
+[ext_resource path="res://default_env.tres" type="Environment" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.25
@@ -17,7 +18,8 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1, 2.41703e-08, -8.40151e-08, 0, 0.961021, 0.276476, 8.74228e-08, 0.276476, -0.961021, 0, 0.696504, -2.53848 )
+transform = Transform( -1, 2.41703e-08, -8.40151e-08, -2.26267e-08, 0.856718, 0.515786, 8.44439e-08, 0.515786, -0.856718, 0, 1.6965, -1.53848 )
+environment = ExtResource( 3 )
 
 [node name="LeftLine" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
