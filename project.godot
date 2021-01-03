@@ -19,6 +19,10 @@ config/name="Kvalfors"
 run/main_scene="res://Levels/Level1.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [input]
 
 left={
