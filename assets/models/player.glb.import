@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/player.dae-cbf876f379411e4df7f1b6418cf421bd.scn"
+path="res://.import/player.glb-ae1edf01baaba8d1685741a4f60c906f.scn"
 
 [deps]
 
-source_file="res://assets/models/player.dae"
-dest_files=[ "res://.import/player.dae-cbf876f379411e4df7f1b6418cf421bd.scn" ]
+source_file="res://assets/models/player.glb"
+dest_files=[ "res://.import/player.glb-ae1edf01baaba8d1685741a4f60c906f.scn" ]
 
 [params]
 
