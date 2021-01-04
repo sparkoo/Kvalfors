@@ -4,8 +4,8 @@ export var SPEED = 5
 export var SIDE_SPEED = 10
 export var JUMP_SPEED = 10
 export var NORMAL_HEIGHT = .7
-var SLIDE_HEIGHT = NORMAL_HEIGHT / 2
-var JUMP_HEIGHT = NORMAL_HEIGHT * 2
+var SLIDE_HEIGHT = -0.35
+var JUMP_HEIGHT = 0.5
 
 const LINE_WIDTH = 1
 
@@ -41,22 +41,26 @@ func run():
 
 
 func jump():
-	translation.y = JUMP_HEIGHT
+	translate(Vector3(0, JUMP_HEIGHT, 0))
+	$Camera.translate(Vector3(0, -JUMP_HEIGHT, 0))
 	$Timers/JumpTimer.start()
 	$PlayerModel/AnimationPlayer.play("jump")
 
 func _on_JumpTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("jump")
+	$Camera.translate(Vector3(0, JUMP_HEIGHT, 0))
 	run()
 
 
 func slide():
-	translation.y = SLIDE_HEIGHT
+	translate(Vector3(0, SLIDE_HEIGHT, 0))
+	$Camera.translate(Vector3(0, -SLIDE_HEIGHT, 0))
 	$Timers/SlideTimer.start()
 	$PlayerModel/AnimationPlayer.play("slide")
 
 func _on_SlideTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("slide")
+	$Camera.translate(Vector3(0, SLIDE_HEIGHT, 0))
 	run()
 
 

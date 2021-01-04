@@ -18,6 +18,7 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1, 2.41703e-08, -8.40151e-08, -2.26267e-08, 0.856718, 0.515786, 8.44439e-08, 0.515786, -0.856718, 0, 1.76913, -2.03367 )
 environment = ExtResource( 3 )
+current = true
 
 [node name="PlayerModel" parent="." instance=ExtResource( 2 )]
 

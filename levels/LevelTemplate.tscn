@@ -13,7 +13,7 @@ script = ExtResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Env"]
 transform = Transform( 0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 0, 4.3759, 0.57997 )
-light_energy = 10.0
+light_energy = 5.0
 
 [node name="Obstacles" type="Node" parent="."]
 
