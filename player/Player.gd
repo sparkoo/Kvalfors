@@ -43,6 +43,7 @@ func _on_JumpSlideTimer_timeout():
 func hit():
 	dead = true
 	print("dead")
+	$player/AnimationPlayer.play("die")
 	get_tree().call_group("game", "gameOver")
 
 
