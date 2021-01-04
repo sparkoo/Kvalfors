@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/resurrect-64-1x.png-1930669c4cc15a993b2b90301566f6e3.s3tc.stex"
-path.etc2="res://.import/resurrect-64-1x.png-1930669c4cc15a993b2b90301566f6e3.etc2.stex"
+path.s3tc="res://.import/resurrect-64-1x.png-d4b2d14cda3344619dbfef80d751732d.s3tc.stex"
+path.etc2="res://.import/resurrect-64-1x.png-d4b2d14cda3344619dbfef80d751732d.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/resurrect-64-1x.png"
-dest_files=[ "res://.import/resurrect-64-1x.png-1930669c4cc15a993b2b90301566f6e3.s3tc.stex", "res://.import/resurrect-64-1x.png-1930669c4cc15a993b2b90301566f6e3.etc2.stex" ]
+source_file="res://assets/models/resurrect-64-1x.png"
+dest_files=[ "res://.import/resurrect-64-1x.png-d4b2d14cda3344619dbfef80d751732d.s3tc.stex", "res://.import/resurrect-64-1x.png-d4b2d14cda3344619dbfef80d751732d.etc2.stex" ]
 
 [params]
 

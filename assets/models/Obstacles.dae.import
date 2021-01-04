@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Obstacles.dae-64485f778bdbb8457f27455fdba99186.scn"
+path="res://.import/Obstacles.dae-0e068adc5e6c440c5d3a1c7c43c9f771.scn"
 
 [deps]
 
-source_file="res://models/Obstacles.dae"
-dest_files=[ "res://.import/Obstacles.dae-64485f778bdbb8457f27455fdba99186.scn" ]
+source_file="res://assets/models/Obstacles.dae"
+dest_files=[ "res://.import/Obstacles.dae-0e068adc5e6c440c5d3a1c7c43c9f771.scn" ]
 
 [params]
 

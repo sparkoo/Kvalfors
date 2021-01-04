@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var SPEED = 10
+export var SPEED = 5
 export var SIDE_SPEED = 10
 export var JUMP_SPEED = 10
 export var NORMAL_HEIGHT = .7
