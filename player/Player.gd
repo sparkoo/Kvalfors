@@ -14,7 +14,7 @@ var motion = Vector3()
 var dead = false
 
 func _ready():
-	translation.y = NORMAL_HEIGHT
+	run()
 
 func _physics_process(delta):
 	move()
@@ -27,30 +27,42 @@ func move():
 		var direction = Input.get_action_strength("left") - Input.get_action_strength("right")
 		translation.x = LINE_WIDTH * direction
 		
-		if Input.is_action_just_pressed("jump") and compare_floats(translation.y, NORMAL_HEIGHT):
-			translation.y = JUMP_HEIGHT
-			$JumpSlideTimer.start()
-		elif Input.is_action_just_pressed("slide") and compare_floats(translation.y, NORMAL_HEIGHT):
-			translation.y = SLIDE_HEIGHT
-			$JumpSlideTimer.start()
+		if Input.is_action_just_pressed("jump") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
+			jump()
+		elif Input.is_action_just_pressed("slide") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
+			slide()
+		
 		move_and_slide(motion)
 
 
-func _on_JumpSlideTimer_timeout():
+func run():
 	translation.y = NORMAL_HEIGHT
+	$PlayerModel/AnimationPlayer.queue("run")
+
+
+func jump():
+	translation.y = JUMP_HEIGHT
+	$Timers/JumpTimer.start()
+	$PlayerModel/AnimationPlayer.play("jump")
+
+func _on_JumpTimer_timeout():
+	$PlayerModel/AnimationPlayer.play_backwards("jump")
+	run()
+
+
+func slide():
+	translation.y = SLIDE_HEIGHT
+	$Timers/SlideTimer.start()
+	$PlayerModel/AnimationPlayer.play("slide")
+
+func _on_SlideTimer_timeout():
+	$PlayerModel/AnimationPlayer.play_backwards("slide")
+	run()
 
 
 func hit():
 	dead = true
-	print("dead")
 	$PlayerModel/AnimationPlayer.play("die")
 	get_tree().call_group("game", "gameOver")
 
 
-func _input(event):
-	pass
-
-const FLOAT_EPSILON = 0.00001
-
-static func compare_floats(a, b, epsilon = FLOAT_EPSILON):
-	return abs(a - b) <= epsilon

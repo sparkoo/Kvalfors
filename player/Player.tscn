@@ -19,14 +19,14 @@ shape = SubResource( 1 )
 transform = Transform( -1, 2.41703e-08, -8.40151e-08, -2.26267e-08, 0.856718, 0.515786, 8.44439e-08, 0.515786, -0.856718, 0, 1.76913, -2.03367 )
 environment = ExtResource( 3 )
 
-[node name="LeftLine" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+[node name="PlayerModel" parent="." instance=ExtResource( 2 )]
 
-[node name="RightLine" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+[node name="Timers" type="Node" parent="."]
 
-[node name="JumpSlideTimer" type="Timer" parent="."]
+[node name="SlideTimer" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="PlayerModel" parent="." instance=ExtResource( 2 )]
-[connection signal="timeout" from="JumpSlideTimer" to="." method="_on_JumpSlideTimer_timeout"]
+[node name="JumpTimer" type="Timer" parent="Timers"]
+one_shot = true
+[connection signal="timeout" from="Timers/SlideTimer" to="." method="_on_SlideTimer_timeout"]
+[connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_JumpTimer_timeout"]
