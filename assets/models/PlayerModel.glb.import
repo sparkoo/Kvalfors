@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Obstacles.glb-acd12d7cdfb51007dc1fbd95b04e5ec2.scn"
+path="res://.import/PlayerModel.glb-504f3925957efa7e4452578b4dee3d07.scn"
 
 [deps]
 
-source_file="res://assets/models/Obstacles.glb"
-dest_files=[ "res://.import/Obstacles.glb-acd12d7cdfb51007dc1fbd95b04e5ec2.scn" ]
+source_file="res://assets/models/PlayerModel.glb"
+dest_files=[ "res://.import/PlayerModel.glb-504f3925957efa7e4452578b4dee3d07.scn" ]
 
 [params]
 
