@@ -74,6 +74,5 @@ func animateAction(action):
 
 func hit():
 	dead = true
-	$PlayerModel/AnimationPlayer.play("die")
-	$Sfx/AudioStreamPlayer.stop()
+	animateAction("die")
 	get_tree().call_group("game", "gameOver")
