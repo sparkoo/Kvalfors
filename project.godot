@@ -16,14 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Kvalfors"
-run/main_scene="res://levelss/Level1.tscn"
+run/main_scene="res://Levels/Level1.tscn"
 config/icon="res://icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 
 [autoload]
 
-Utils="*res://utilss/utils.gd"
+Utils="*res://Utils/utils.gd"
 
 [debug]
 
