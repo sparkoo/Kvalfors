@@ -59,7 +59,7 @@ func slide():
 	translate(Vector3(0, SLIDE_HEIGHT, 0))
 	$Camera.global_translate(Vector3(0, -SLIDE_HEIGHT, 0))
 	$Timers/SlideTimer.start()
-	$PlayerModel/AnimationPlayer.play("slide")
+	animateAction("slide")
 
 func _on_SlideTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("slide")
