@@ -47,5 +47,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 22.351 )
 [node name="ObstacleBlock" parent="Obstacles" index="2" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 51.765 )
 
-[node name="Player" parent="." index="2"]
+[node name="Player" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0.935 )

@@ -22,8 +22,7 @@ func _physics_process(delta):
 	
 func move():
 	if not dead:
-		motion.z = SPEED
-	
+		var camera_transform = $Camera.global_transform
 		var direction = Input.get_action_strength("left") - Input.get_action_strength("right")
 		translation.x = LINE_WIDTH * direction
 		
@@ -31,20 +30,21 @@ func move():
 			jump()
 		elif Input.is_action_just_pressed("slide") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
 			slide()
+		$Camera.global_transform = camera_transform
 		
+		motion.z = SPEED
 		move_and_slide(motion)
 
 
 func run():
 	if not dead:
-		translation.y = NORMAL_HEIGHT
+		resetHeight()
 		animateAction("run")
 
 
 func jump():
 	print("jump")
 	translate(Vector3(0, JUMP_HEIGHT, 0))
-	$Camera.global_translate(Vector3(0, -JUMP_HEIGHT, 0))
 	$Timers/JumpTimer.start()
 	animateAction("jump")
 	
@@ -52,20 +52,17 @@ func jump():
 func _on_JumpTimer_timeout():
 	if not dead:
 		$PlayerModel/AnimationPlayer.play_backwards("jump")
-		$Camera.global_translate(Vector3(0, JUMP_HEIGHT, 0))
 		run()
 
 
 func slide():
 	translate(Vector3(0, SLIDE_HEIGHT, 0))
-	$Camera.global_translate(Vector3(0, -SLIDE_HEIGHT, 0))
 	$Timers/SlideTimer.start()
 	animateAction("slide")
 
 func _on_SlideTimer_timeout():
 	if not dead:
 		$PlayerModel/AnimationPlayer.play_backwards("slide")
-		$Camera.global_translate(Vector3(0, SLIDE_HEIGHT, 0))
 		run()
 
 
@@ -76,6 +73,12 @@ func animateAction(action):
 
 func hit():
 	dead = true
-	translation.y = NORMAL_HEIGHT
+	resetHeight()
 	animateAction("die")
 	get_tree().call_group("game", "gameOver")
+
+
+func resetHeight():
+	var camera_transform = $Camera.global_transform
+	translation.y = NORMAL_HEIGHT
+	$Camera.global_transform = camera_transform
