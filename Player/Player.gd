@@ -38,8 +38,7 @@ func move():
 func run():
 	print("run")
 	translation.y = NORMAL_HEIGHT
-	$PlayerModel/AnimationPlayer.queue("run")
-	$Sfx/AudioStreamPlayer.play()
+	animateAction("run")
 
 
 func jump():
@@ -47,8 +46,8 @@ func jump():
 	translate(Vector3(0, JUMP_HEIGHT, 0))
 	$Camera.global_translate(Vector3(0, -JUMP_HEIGHT, 0))
 	$Timers/JumpTimer.start()
-	$PlayerModel/AnimationPlayer.play("jump")
-	$Sfx/AudioStreamPlayer.stop()
+	animateAction("jump")
+	
 
 func _on_JumpTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("jump")
@@ -61,13 +60,17 @@ func slide():
 	$Camera.global_translate(Vector3(0, -SLIDE_HEIGHT, 0))
 	$Timers/SlideTimer.start()
 	$PlayerModel/AnimationPlayer.play("slide")
-	$Sfx/AudioStreamPlayer.stop()
 
 func _on_SlideTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("slide")
 	$Camera.global_translate(Vector3(0, SLIDE_HEIGHT, 0))
 	run()
 
+
+func animateAction(action):
+	$PlayerModel/AnimationPlayer.play(action)
+	$Sfx/AudioStreamPlayer.stream = load("res://assets/sfx/%s.ogg" % action)
+	$Sfx/AudioStreamPlayer.play()
 
 func hit():
 	dead = true
