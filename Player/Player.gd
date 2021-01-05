@@ -1,5 +1,8 @@
 extends KinematicBody
 
+enum PlayerActiveState{RUNNING, JUMP, SLIDE}
+enum PlayerState{RUNNING, DEAD, IDLE}
+
 export var SPEED = 5
 export var SIDE_SPEED = 10
 export var JUMP_SPEED = 10
@@ -11,21 +14,22 @@ const LINE_WIDTH = 1
 
 var motion = Vector3()
 
-var dead = false
+var playerState = PlayerState.IDLE
+var playerActiveState = PlayerActiveState.RUNNING
 
 func _ready():
 	run()
 
 func _physics_process(delta):
-	move()
+	if playerState == PlayerState.RUNNING:
+		move()
 
 	
 func move():
-	if not dead:
+	if playerState == PlayerState.RUNNING:
 		var camera_transform = $Camera.global_transform
 		var direction = Input.get_action_strength("left") - Input.get_action_strength("right")
 		translation.x = LINE_WIDTH * direction
-		
 		if Input.is_action_just_pressed("jump") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
 			jump()
 		elif Input.is_action_just_pressed("slide") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
@@ -37,9 +41,9 @@ func move():
 
 
 func run():
-	if not dead:
-		resetHeight()
-		animateAction("run")
+	playerState = PlayerState.RUNNING
+	resetHeight()
+	animateAction("run")
 
 
 func jump():
@@ -50,7 +54,7 @@ func jump():
 	
 
 func _on_JumpTimer_timeout():
-	if not dead:
+	if playerState == PlayerState.RUNNING:
 		$PlayerModel/AnimationPlayer.play_backwards("jump")
 		run()
 
@@ -61,7 +65,7 @@ func slide():
 	animateAction("slide")
 
 func _on_SlideTimer_timeout():
-	if not dead:
+	if playerState == PlayerState.RUNNING:
 		$PlayerModel/AnimationPlayer.play_backwards("slide")
 		run()
 
@@ -72,11 +76,14 @@ func animateAction(action):
 	$Sfx/AudioStreamPlayer.play()
 
 func hit():
-	dead = true
+	playerState = PlayerState.DEAD
 	resetHeight()
 	animateAction("die")
 	get_tree().call_group("game", "gameOver")
 
+func idle():
+	playerState = PlayerState.IDLE
+	animateAction("run")
 
 func resetHeight():
 	var camera_transform = $Camera.global_transform
