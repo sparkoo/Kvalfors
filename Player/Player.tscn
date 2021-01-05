@@ -1,10 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/PlayerModel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
-
-
+[ext_resource path="res://assets/sfx/run.ogg" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.25
@@ -31,5 +30,11 @@ one_shot = true
 
 [node name="JumpTimer" type="Timer" parent="Timers"]
 one_shot = true
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 4 )
+volume_db = -30.0
 [connection signal="timeout" from="Timers/SlideTimer" to="." method="_on_SlideTimer_timeout"]
 [connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_JumpTimer_timeout"]

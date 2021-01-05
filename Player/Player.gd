@@ -39,6 +39,7 @@ func run():
 	print("run")
 	translation.y = NORMAL_HEIGHT
 	$PlayerModel/AnimationPlayer.queue("run")
+	$Sfx/AudioStreamPlayer.play()
 
 
 func jump():
@@ -47,6 +48,7 @@ func jump():
 	$Camera.global_translate(Vector3(0, -JUMP_HEIGHT, 0))
 	$Timers/JumpTimer.start()
 	$PlayerModel/AnimationPlayer.play("jump")
+	$Sfx/AudioStreamPlayer.stop()
 
 func _on_JumpTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("jump")
@@ -59,6 +61,7 @@ func slide():
 	$Camera.global_translate(Vector3(0, -SLIDE_HEIGHT, 0))
 	$Timers/SlideTimer.start()
 	$PlayerModel/AnimationPlayer.play("slide")
+	$Sfx/AudioStreamPlayer.stop()
 
 func _on_SlideTimer_timeout():
 	$PlayerModel/AnimationPlayer.play_backwards("slide")
@@ -69,4 +72,5 @@ func _on_SlideTimer_timeout():
 func hit():
 	dead = true
 	$PlayerModel/AnimationPlayer.play("die")
+	$Sfx/AudioStreamPlayer.stop()
 	get_tree().call_group("game", "gameOver")
