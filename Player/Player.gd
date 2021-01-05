@@ -36,9 +36,9 @@ func move():
 
 
 func run():
-	print("run")
-	translation.y = NORMAL_HEIGHT
-	animateAction("run")
+	if not dead:
+		translation.y = NORMAL_HEIGHT
+		animateAction("run")
 
 
 func jump():
@@ -50,9 +50,10 @@ func jump():
 	
 
 func _on_JumpTimer_timeout():
-	$PlayerModel/AnimationPlayer.play_backwards("jump")
-	$Camera.global_translate(Vector3(0, JUMP_HEIGHT, 0))
-	run()
+	if not dead:
+		$PlayerModel/AnimationPlayer.play_backwards("jump")
+		$Camera.global_translate(Vector3(0, JUMP_HEIGHT, 0))
+		run()
 
 
 func slide():
@@ -62,9 +63,10 @@ func slide():
 	animateAction("slide")
 
 func _on_SlideTimer_timeout():
-	$PlayerModel/AnimationPlayer.play_backwards("slide")
-	$Camera.global_translate(Vector3(0, SLIDE_HEIGHT, 0))
-	run()
+	if not dead:
+		$PlayerModel/AnimationPlayer.play_backwards("slide")
+		$Camera.global_translate(Vector3(0, SLIDE_HEIGHT, 0))
+		run()
 
 
 func animateAction(action):
@@ -74,5 +76,6 @@ func animateAction(action):
 
 func hit():
 	dead = true
+	translation.y = NORMAL_HEIGHT
 	animateAction("die")
 	get_tree().call_group("game", "gameOver")
