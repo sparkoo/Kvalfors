@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://obstacles/Obstacle.gd" type="Script" id=1]
+[ext_resource path="res://Obstacles/Obstacle.gd" type="Script" id=1]
 
 [node name="ObstacleTemplate" type="Area"]
 collision_layer = 2
