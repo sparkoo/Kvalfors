@@ -24,9 +24,9 @@ __meta__ = {
 }
 
 [node name="Start" type="Button" parent="CanvasLayer/CenterContainer"]
-margin_left = 491.0
-margin_top = 290.0
-margin_right = 532.0
-margin_bottom = 310.0
+margin_left = 476.0
+margin_top = 279.0
+margin_right = 547.0
+margin_bottom = 320.0
 text = "GO !"
 [connection signal="pressed" from="CanvasLayer/CenterContainer/Start" to="." method="_on_Start_pressed"]

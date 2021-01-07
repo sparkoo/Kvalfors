@@ -4,13 +4,12 @@
 [ext_resource path="res://Obstacles/ObstacleSlideModel.tscn" type="PackedScene" id=2]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.5, 0.296491, 0.2 )
+extents = Vector3( 0.5, 0.4, 0.2 )
 
 [node name="ObstacleSlide" instance=ExtResource( 1 )]
 
 [node name="CollisionShape" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.634726, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0 )
 shape = SubResource( 1 )
 
-[node name="ObstacleSlide" parent="." index="1" instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+[node name="ObstacleSlideModel" parent="." index="1" instance=ExtResource( 2 )]
