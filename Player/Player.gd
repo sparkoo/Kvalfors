@@ -5,10 +5,10 @@ enum PlayerState{RUNNING, DEAD, IDLE}
 
 export var SPEED = 5
 export var SIDE_SPEED = 20
-export var JUMP_SPEED = 10
+export var JUMP_SPEED = 1
 export var NORMAL_HEIGHT = .7
 var SLIDE_HEIGHT = -0.35
-var JUMP_HEIGHT = 0.5
+var JUMP_HEIGHT = 1.2
 
 const LINE_WIDTH = 1
 
@@ -46,12 +46,28 @@ func move():
 					motion.x = -SIDE_SPEED
 			else:
 				motion.x = 0
-		if Input.is_action_just_pressed("jump") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
+		if Input.is_action_just_pressed("jump") and playerActiveState == PlayerActiveState.RUNNING:
+			playerActiveState = PlayerActiveState.JUMP
 			jump()
-		elif Input.is_action_just_pressed("slide") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
+		elif Input.is_action_just_pressed("slide") and playerActiveState == PlayerActiveState.RUNNING:
+			playerActiveState = PlayerActiveState.SLIDE
 			slide()
 		$Camera.global_transform = camera_transform
 		
+		print(translation.y , " == ", NORMAL_HEIGHT)
+		if playerActiveState == PlayerActiveState.JUMP:
+			motion.y = moveToMotion(translation.y, JUMP_HEIGHT, JUMP_SPEED)
+		elif playerActiveState == PlayerActiveState.SLIDE:
+			motion.y = moveToMotion(translation.y, SLIDE_HEIGHT, -JUMP_SPEED)
+		elif playerActiveState == PlayerActiveState.RUNNING:
+			if not Utils.compare_floats(translation.y, NORMAL_HEIGHT, 0.1):
+				if translation.y < NORMAL_HEIGHT:
+					motion.y = JUMP_SPEED
+				else:
+					motion.y = -JUMP_SPEED
+			else:
+				motion.y = 0
+			
 		motion.z = SPEED
 		move_and_slide(motion)
 		updateDistance()
@@ -69,29 +85,27 @@ func updateDistance():
 
 func run():
 	playerState = PlayerState.RUNNING
-	resetHeight()
 	animateAction("run")
 
 
 func jump():
-	print("jump")
-	translate(Vector3(0, JUMP_HEIGHT, 0))
 	$Timers/JumpTimer.start()
 	animateAction("jump")
 	
 
 func _on_JumpTimer_timeout():
+	playerActiveState = PlayerActiveState.RUNNING
 	if playerState == PlayerState.RUNNING:
 		$PlayerModel/AnimationPlayer.play_backwards("jump")
 		run()
 
 
 func slide():
-	translate(Vector3(0, SLIDE_HEIGHT, 0))
 	$Timers/SlideTimer.start()
 	animateAction("slide")
 
 func _on_SlideTimer_timeout():
+	playerActiveState = PlayerActiveState.RUNNING
 	if playerState == PlayerState.RUNNING:
 		$PlayerModel/AnimationPlayer.play_backwards("slide")
 		run()
