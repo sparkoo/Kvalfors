@@ -9,7 +9,7 @@ lacunarity = 1.57
 
 [sub_resource type="NoiseTexture" id=4]
 width = 2048
-height = 1
+height = 2048
 noise = SubResource( 3 )
 
 [sub_resource type="SpatialMaterial" id=5]
