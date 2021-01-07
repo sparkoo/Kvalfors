@@ -14,7 +14,6 @@ func _on_GenNext_body_entered(body: KinematicBody):
 	cleanup()
 
 func generateNext():
-	print("generating")
 	var nextBlock: StaticBody = load("res://LevelBits/RoadBlock.tscn").instance()
 	roadBlocks.add_child(nextBlock)
 	nextBlock.translate($Env/NextPosition.translation)

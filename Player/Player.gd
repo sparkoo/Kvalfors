@@ -17,8 +17,12 @@ var motion = Vector3()
 var playerState = PlayerState.IDLE
 var playerActiveState = PlayerActiveState.RUNNING
 
+var distance = 0.0
+var lastKnownPosition: Vector3
+
 func _ready():
 	run()
+	lastKnownPosition = translation
 
 func _physics_process(delta):
 	if playerState == PlayerState.RUNNING:
@@ -38,7 +42,13 @@ func move():
 		
 		motion.z = SPEED
 		move_and_slide(motion)
+		updateDistance()
 
+
+func updateDistance():
+	distance += lastKnownPosition.distance_to(translation)
+	lastKnownPosition = translation
+	get_tree().call_group("player", "playerDistanceUpdate", distance)
 
 func run():
 	playerState = PlayerState.RUNNING

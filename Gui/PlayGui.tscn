@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Gui/Theme.tres" type="Theme" id=1]
+[ext_resource path="res://Gui/PlayGui.gd" type="Script" id=2]
+
+[node name="PlayGui" type="Control" groups=[
+"player",
+]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Distance" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -159.0
+margin_top = 32.0
+margin_right = -102.0
+margin_bottom = 65.0
+text = "0 m"
+__meta__ = {
+"_edit_use_anchors_": false
+}

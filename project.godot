@@ -32,7 +32,6 @@ settings/stdout/print_fps=true
 
 [display]
 
-window/size/resizable=false
 window/handheld/orientation="portrait"
 
 [input]
