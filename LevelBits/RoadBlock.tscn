@@ -1,6 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="OpenSimplexNoise" id=3]
+seed = 4
+octaves = 1
+period = 10.8
+persistence = 0.453
+lacunarity = 1.57
+
+[sub_resource type="NoiseTexture" id=4]
+width = 2048
+height = 1
+noise = SubResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = SubResource( 4 )
 
 [sub_resource type="PlaneMesh" id=1]
+material = SubResource( 5 )
 size = Vector2( 3, 10 )
 
 [sub_resource type="BoxShape" id=2]
