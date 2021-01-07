@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Levels/LevelTemplate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Levels/LevelEndless.gd" type="Script" id=2]
+[ext_resource path="res://LevelBits/RoadBlock.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.5, 2, 0.5 )
+
+[node name="LevelEndless" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="RoadBlock" parent="Env" index="1" instance=ExtResource( 3 )]
+
+[node name="GenNext" type="Area" parent="Env" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 9.5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Env/GenNext" index="0"]
+shape = SubResource( 1 )
+
+[node name="NextPosition" type="Position3D" parent="Env" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+
+[node name="Player" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
+[connection signal="body_entered" from="Env/GenNext" to="." method="_on_GenNext_body_entered"]
