@@ -4,10 +4,10 @@ enum PlayerActiveState{RUNNING, JUMP, SLIDE}
 enum PlayerState{RUNNING, DEAD, IDLE}
 
 export var SPEED = 5
-export var SIDE_SPEED = 20
-export var JUMP_SPEED = 1
+export var SIDE_SPEED = 15
+export var JUMP_SPEED = 10
 export var NORMAL_HEIGHT = .7
-var SLIDE_HEIGHT = -0.35
+var SLIDE_HEIGHT = 0.35
 var JUMP_HEIGHT = 1.2
 
 const LINE_WIDTH = 1
@@ -24,56 +24,51 @@ func _ready():
 	run()
 	lastKnownPosition = translation
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if playerState == PlayerState.RUNNING:
-		move()
+		move(delta)
 
 	
-func move():
+func move(delta: float):
 	if playerState == PlayerState.RUNNING:
-		var camera_transform = $Camera.global_transform
-#		var direction = Input.get_action_strength("left") - Input.get_action_strength("right")
-#		translation.x = LINE_WIDTH * direction
 		if Input.is_action_pressed("left"):
-			motion.x = moveToMotion(translation.x, LINE_WIDTH, SIDE_SPEED)
+			motion.x = moveToMotion(translation.x, LINE_WIDTH, SIDE_SPEED, delta)
 		elif Input.is_action_pressed("right"):
-			motion.x = moveToMotion(translation.x, -LINE_WIDTH, -SIDE_SPEED)
+			motion.x = moveToMotion(translation.x, -LINE_WIDTH, SIDE_SPEED, delta)
 		else:
-			if not Utils.compare_floats(translation.x, 0, 0.01):
-				if translation.x < 0:
-					motion.x = SIDE_SPEED
-				else:
-					motion.x = -SIDE_SPEED
-			else:
-				motion.x = 0
+			motion.x = moveToMotion(translation.x, 0, SIDE_SPEED, delta)
+				
 		if Input.is_action_just_pressed("jump") and playerActiveState == PlayerActiveState.RUNNING:
 			playerActiveState = PlayerActiveState.JUMP
 			jump()
 		elif Input.is_action_just_pressed("slide") and playerActiveState == PlayerActiveState.RUNNING:
 			playerActiveState = PlayerActiveState.SLIDE
 			slide()
-		$Camera.global_transform = camera_transform
 		
 		if playerActiveState == PlayerActiveState.JUMP:
-			motion.y = moveToMotion(translation.y, JUMP_HEIGHT, JUMP_SPEED)
+			motion.y = moveToMotion(translation.y, JUMP_HEIGHT, JUMP_SPEED, delta)
 		elif playerActiveState == PlayerActiveState.SLIDE:
-			motion.y = moveToMotion(translation.y, SLIDE_HEIGHT, -JUMP_SPEED)
+			motion.y = moveToMotion(translation.y, SLIDE_HEIGHT, JUMP_SPEED, delta)
 		elif playerActiveState == PlayerActiveState.RUNNING:
-			if not Utils.compare_floats(translation.y, NORMAL_HEIGHT, 0.1):
-				if translation.y < NORMAL_HEIGHT:
-					motion.y = JUMP_SPEED
-				else:
-					motion.y = -JUMP_SPEED
-			else:
-				motion.y = 0
+			motion.y = moveToMotion(translation.y, NORMAL_HEIGHT, JUMP_SPEED, delta)
 		
 		motion.z = SPEED
 		move_and_slide(motion)
+#		$Camera.translate(Vector3(motion.x * delta, -motion.y * delta, 0))
 		updateDistance()
 
-func moveToMotion(from, to, speed, tolerance = 0.01):
+func moveToMotion(from: float, to: float, speed: float, delta: float, tolerance: float = 0.01):
 	if not Utils.compare_floats(from, to, 0.01):
-		return speed
+		if to > from:
+			if from + (speed * delta) > to:
+				return (to - from) / delta
+			else:
+				return speed
+		else:
+			if from + (speed * delta) < to:
+				return (to - from) / delta
+			else:
+				return -speed
 	else:
 		return 0
 
@@ -84,7 +79,7 @@ func updateDistance():
 
 func run():
 	playerState = PlayerState.RUNNING
-	animateAction("run")
+	animateAction("run", true)
 
 
 func jump():
@@ -110,8 +105,11 @@ func _on_SlideTimer_timeout():
 		run()
 
 
-func animateAction(action):
-	$PlayerModel/AnimationPlayer.play(action)
+func animateAction(action, queue: bool = false):
+	if queue:
+		$PlayerModel/AnimationPlayer.queue(action)
+	else:
+		$PlayerModel/AnimationPlayer.play(action)
 	$Sfx/AudioStreamPlayer.stream = load("res://assets/sfx/%s.ogg" % action)
 	$Sfx/AudioStreamPlayer.play()
 
