@@ -54,7 +54,6 @@ func move():
 			slide()
 		$Camera.global_transform = camera_transform
 		
-		print(translation.y , " == ", NORMAL_HEIGHT)
 		if playerActiveState == PlayerActiveState.JUMP:
 			motion.y = moveToMotion(translation.y, JUMP_HEIGHT, JUMP_SPEED)
 		elif playerActiveState == PlayerActiveState.SLIDE:
@@ -67,7 +66,7 @@ func move():
 					motion.y = -JUMP_SPEED
 			else:
 				motion.y = 0
-			
+		
 		motion.z = SPEED
 		move_and_slide(motion)
 		updateDistance()
