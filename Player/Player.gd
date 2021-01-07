@@ -4,7 +4,7 @@ enum PlayerActiveState{RUNNING, JUMP, SLIDE}
 enum PlayerState{RUNNING, DEAD, IDLE}
 
 export var SPEED = 5
-export var SIDE_SPEED = 10
+export var SIDE_SPEED = 20
 export var JUMP_SPEED = 10
 export var NORMAL_HEIGHT = .7
 var SLIDE_HEIGHT = -0.35
@@ -32,8 +32,20 @@ func _physics_process(delta):
 func move():
 	if playerState == PlayerState.RUNNING:
 		var camera_transform = $Camera.global_transform
-		var direction = Input.get_action_strength("left") - Input.get_action_strength("right")
-		translation.x = LINE_WIDTH * direction
+#		var direction = Input.get_action_strength("left") - Input.get_action_strength("right")
+#		translation.x = LINE_WIDTH * direction
+		if Input.is_action_pressed("left"):
+			motion.x = moveToMotion(translation.x, LINE_WIDTH, SIDE_SPEED)
+		elif Input.is_action_pressed("right"):
+			motion.x = moveToMotion(translation.x, -LINE_WIDTH, -SIDE_SPEED)
+		else:
+			if not Utils.compare_floats(translation.x, 0, 0.01):
+				if translation.x < 0:
+					motion.x = SIDE_SPEED
+				else:
+					motion.x = -SIDE_SPEED
+			else:
+				motion.x = 0
 		if Input.is_action_just_pressed("jump") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
 			jump()
 		elif Input.is_action_just_pressed("slide") and Utils.compare_floats(translation.y, NORMAL_HEIGHT):
@@ -44,9 +56,14 @@ func move():
 		move_and_slide(motion)
 		updateDistance()
 
+func moveToMotion(from, to, speed, tolerance = 0.01):
+	if not Utils.compare_floats(from, to, 0.01):
+		return speed
+	else:
+		return 0
 
 func updateDistance():
-	distance += lastKnownPosition.distance_to(translation)
+	distance += translation.z - lastKnownPosition.z
 	lastKnownPosition = translation
 	get_tree().call_group("player", "playerDistanceUpdate", distance)
 
