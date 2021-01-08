@@ -15,6 +15,7 @@ var motion = Vector3()
 
 var playerState = PlayerState.IDLE
 var playerActiveState = PlayerActiveState.RUNNING
+var currentLine = 0
 
 var distance = 0.0
 
@@ -33,12 +34,10 @@ func move(delta: float):
 		move_and_slide(motion)
 
 func handleSideMoves(delta):
-	if Input.is_action_pressed("left") and playerActiveState == PlayerActiveState.RUNNING:
-		motion.x = moveToMotion(translation.x, LINE_WIDTH, SIDE_SPEED, delta)
-	elif Input.is_action_pressed("right") and playerActiveState == PlayerActiveState.RUNNING:
-		motion.x = moveToMotion(translation.x, -LINE_WIDTH, SIDE_SPEED, delta)
-	elif playerActiveState == PlayerActiveState.RUNNING:
-		motion.x = moveToMotion(translation.x, 0, SIDE_SPEED, delta)
+	if playerActiveState == PlayerActiveState.RUNNING:
+		currentLine = Input.get_action_strength("left") - Input.get_action_strength("right")
+	
+	motion.x = moveToMotion(translation.x, LINE_WIDTH * currentLine, SIDE_SPEED, delta)
 
 func handleJumpSlideMoves(delta):
 	# just change states here, manage animations etc.
