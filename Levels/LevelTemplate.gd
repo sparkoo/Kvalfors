@@ -34,7 +34,6 @@ func gameStateChanged(newstate):
 	print("hohoho")
 
 func generateNext():
-	print("generate")
 	var nextBlock: StaticBody = roadBlockResource.instance()
 	roadBlocks.add_child(nextBlock)
 	nextBlock.translate(nextPositionPointer.translation)

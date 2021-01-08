@@ -30,6 +30,7 @@ shape = SubResource( 1 )
 one_shot = true
 
 [node name="JumpTimer" type="Timer" parent="Timers"]
+wait_time = 0.7
 one_shot = true
 
 [node name="Sfx" type="Node" parent="."]
