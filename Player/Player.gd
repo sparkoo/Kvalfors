@@ -17,11 +17,9 @@ var playerState = PlayerState.IDLE
 var playerActiveState = PlayerActiveState.RUNNING
 
 var distance = 0.0
-var lastKnownPosition: Vector3
 
 func _ready():
 	run()
-	lastKnownPosition = translation
 
 func _physics_process(delta: float):
 	if playerState == PlayerState.RUNNING:
@@ -88,11 +86,6 @@ func moveToMotion(from: float, to: float, speed: float, delta: float, tolerance:
 				return -speed
 	else:
 		return 0
-
-func updateDistance():
-	distance += translation.z - lastKnownPosition.z
-	lastKnownPosition = translation
-	get_tree().call_group("player", "playerDistanceUpdate", distance)
 
 func run():
 	playerState = PlayerState.RUNNING
