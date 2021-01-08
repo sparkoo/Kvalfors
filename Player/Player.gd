@@ -52,7 +52,11 @@ func move(delta: float):
 		elif playerActiveState == PlayerActiveState.RUNNING:
 			motion.y = moveToMotion(translation.y, NORMAL_HEIGHT, JUMP_SPEED, delta)
 		
-		motion.z = SPEED
+		var blocks = get_tree().get_root().find_node("Level", true, false)
+		blocks.translate(Vector3(0, 0, SPEED * delta * -1))
+		
+#		motion.z = SPEED
+#		print(motion)
 		move_and_slide(motion)
 #		$Camera.translate(Vector3(motion.x * delta, -motion.y * delta, 0))
 		updateDistance()
