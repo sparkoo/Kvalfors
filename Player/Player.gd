@@ -3,7 +3,6 @@ extends KinematicBody
 enum PlayerActiveState{RUNNING, JUMP, SLIDE}
 enum PlayerState{RUNNING, DEAD, IDLE}
 
-export var SPEED = 5
 export var SIDE_SPEED = 15
 export var JUMP_SPEED = 10
 export var NORMAL_HEIGHT = .7
@@ -52,12 +51,7 @@ func move(delta: float):
 		elif playerActiveState == PlayerActiveState.RUNNING:
 			motion.y = moveToMotion(translation.y, NORMAL_HEIGHT, JUMP_SPEED, delta)
 		
-		var blocks = get_tree().get_root().find_node("Level", true, false)
-		blocks.translate(Vector3(0, 0, SPEED * delta * -1))
-		
 		move_and_slide(motion)
-		distance += SPEED * delta
-		get_tree().call_group("player", "playerDistanceUpdate", distance)
 
 func moveToMotion(from: float, to: float, speed: float, delta: float, tolerance: float = 0.01):
 	if not Utils.compare_floats(from, to, 0.01):

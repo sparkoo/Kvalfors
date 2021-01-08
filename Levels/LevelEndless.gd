@@ -1,7 +1,7 @@
 extends "res://Levels/LevelTemplate.gd"
 
 func _ready():
-	for n in range(10):
+	for n in range(2):
 		generateNext()
 
 func moveGenDetector():

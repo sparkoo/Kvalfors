@@ -44,6 +44,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
 [node name="GameOver" parent="." instance=ExtResource( 1 )]
 visible = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Gui" type="CanvasLayer" parent="."]
 
-[node name="PlayGui" parent="CanvasLayer" instance=ExtResource( 4 )]
+[node name="PlayGui" parent="Gui" instance=ExtResource( 4 )]
