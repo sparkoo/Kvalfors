@@ -55,11 +55,9 @@ func move(delta: float):
 		var blocks = get_tree().get_root().find_node("Level", true, false)
 		blocks.translate(Vector3(0, 0, SPEED * delta * -1))
 		
-#		motion.z = SPEED
-#		print(motion)
 		move_and_slide(motion)
-#		$Camera.translate(Vector3(motion.x * delta, -motion.y * delta, 0))
-		updateDistance()
+		distance += SPEED * delta
+		get_tree().call_group("player", "playerDistanceUpdate", distance)
 
 func moveToMotion(from: float, to: float, speed: float, delta: float, tolerance: float = 0.01):
 	if not Utils.compare_floats(from, to, 0.01):
