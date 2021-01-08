@@ -26,7 +26,6 @@ func _physics_process(delta: float):
 	if playerState == PlayerState.RUNNING:
 		move(delta)
 
-	
 func move(delta: float):
 	if playerState == PlayerState.RUNNING:
 		handleSideMoves(delta)
@@ -34,6 +33,7 @@ func move(delta: float):
 		move_and_slide(motion)
 
 func handleSideMoves(delta):
+	# allow change lines only when running
 	if playerActiveState == PlayerActiveState.RUNNING:
 		currentLine = Input.get_action_strength("left") - Input.get_action_strength("right")
 	
