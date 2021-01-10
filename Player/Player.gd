@@ -4,14 +4,18 @@ enum PlayerActiveState{RUNNING, JUMP, SLIDE}
 enum PlayerState{RUNNING, DEAD, IDLE}
 
 export var SIDE_SPEED = 15
-export var JUMP_SPEED = 10
+export var JUMP_SPEED = 7
 export var NORMAL_HEIGHT = .7
 var SLIDE_HEIGHT = 0.35
 var JUMP_HEIGHT = 1.2
+const NORMAL_SHAPE_HEIGHT = 0.6
+const SLIDE_SHAPE_HEIGHT = 0.2
 
 const LINE_WIDTH = 1
 
+const UP = Vector3(0, 1, 0)
 var motion = Vector3()
+const G = -.25
 
 var playerState = PlayerState.IDLE
 var playerActiveState = PlayerActiveState.RUNNING
@@ -25,40 +29,38 @@ func _ready():
 func _physics_process(delta: float):
 	if playerState == PlayerState.RUNNING:
 		move(delta)
+	else:
+		motion.y += G
+	
+	move_and_slide(motion, UP)
 
 func move(delta: float):
-	if playerState == PlayerState.RUNNING:
-		handleSideMoves(delta)
-		handleJumpSlideMoves(delta)
-		move_and_slide(motion)
+	handleSideMoves(delta)
+	handleVerticalMoves(delta)
 
 func handleSideMoves(delta):
 	# allow change lines only when running
-	if playerActiveState == PlayerActiveState.RUNNING:
+	if playerActiveState == PlayerActiveState.RUNNING and is_on_floor():
 		currentLine = Input.get_action_strength("left") - Input.get_action_strength("right")
 	
 	motion.x = moveToMotion(translation.x, LINE_WIDTH * currentLine, SIDE_SPEED, delta)
 
-func handleJumpSlideMoves(delta):
-	# just change states here, manage animations etc.
-	if Input.is_action_just_pressed("jump") and playerActiveState == PlayerActiveState.RUNNING:
+func handleVerticalMoves(delta):
+	if !is_on_floor():
+		motion.y += G
+	elif Input.is_action_just_pressed("jump") and playerActiveState == PlayerActiveState.RUNNING:
 		playerActiveState = PlayerActiveState.JUMP
-		$Timers/JumpTimer.start()
+		motion.y = JUMP_SPEED
 		animateAction("jump")
+		$Timers/JumpTimer.start()
 	elif Input.is_action_just_pressed("slide") and playerActiveState == PlayerActiveState.RUNNING:
 		playerActiveState = PlayerActiveState.SLIDE
-		$Timers/SlideTimer.start()
+		$CollisionShape.shape.extents.y = SLIDE_SHAPE_HEIGHT
 		animateAction("slide")
+		$Timers/SlideTimer.start()
 	elif Input.is_action_just_released("slide") and playerActiveState == PlayerActiveState.SLIDE:
 		cancelSlide()
-	
-	# actual movement is done here, based on player active state
-	if playerActiveState == PlayerActiveState.JUMP:
-		motion.y = moveToMotion(translation.y, JUMP_HEIGHT, JUMP_SPEED, delta)
-	elif playerActiveState == PlayerActiveState.SLIDE:
-		motion.y = moveToMotion(translation.y, SLIDE_HEIGHT, JUMP_SPEED, delta)
-	elif playerActiveState == PlayerActiveState.RUNNING:
-		motion.y = moveToMotion(translation.y, NORMAL_HEIGHT, JUMP_SPEED, delta)
+
 
 # moves from `from` value to `to` with `speed*delta` speed, unles we're already there.
 # If frame distance is over the destination value, go to the destination directly
@@ -88,6 +90,7 @@ func moveToMotion(from: float, to: float, speed: float, delta: float, tolerance:
 
 func run():
 	playerState = PlayerState.RUNNING
+	playerActiveState = PlayerActiveState.RUNNING
 	animateAction("run", true)
 
 
@@ -99,11 +102,11 @@ func _on_JumpTimer_timeout():
 
 
 func cancelSlide():
+	$CollisionShape.shape.extents.y = NORMAL_SHAPE_HEIGHT
+	$PlayerModel/AnimationPlayer.play_backwards("slide")
 	$Timers/SlideTimer.stop()
-	playerActiveState = PlayerActiveState.RUNNING
-	if playerState == PlayerState.RUNNING:
-		$PlayerModel/AnimationPlayer.play_backwards("slide")
-		run()
+	run()
+	animateAction("run", true)
 
 func _on_SlideTimer_timeout():
 	cancelSlide()
@@ -119,7 +122,7 @@ func animateAction(action, queue: bool = false):
 
 func hit():
 	playerState = PlayerState.DEAD
-	resetHeight()
+#	resetHeight()
 	animateAction("die")
 	get_tree().call_group("game", "gameOver")
 

@@ -5,8 +5,8 @@
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
 [ext_resource path="res://assets/sfx/run.ogg" type="AudioStream" id=4]
 
-[sub_resource type="CapsuleShape" id=1]
-radius = 0.25
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.2, 0.6, 0.625 )
 
 [node name="Player" type="KinematicBody" groups=[
 "game",
@@ -20,6 +20,7 @@ transform = Transform( -1, 2.41703e-08, -8.40151e-08, -1.5819e-08, 0.895129, 0.4
 environment = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0254979, 0 )
 shape = SubResource( 1 )
 
 [node name="PlayerModel" parent="." instance=ExtResource( 2 )]

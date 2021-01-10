@@ -34,7 +34,7 @@ transform = Transform( 0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.
 light_energy = 5.0
 
 [node name="Camera" type="Camera" parent="Env"]
-transform = Transform( -1, 2.41703e-08, -8.40151e-08, -8.5583e-09, 0.929339, 0.369228, 8.70028e-08, 0.369228, -0.929339, 0, 1.89714, -1.62311 )
+transform = Transform( -1, 2.41703e-08, -8.4015e-08, -8.5583e-09, 0.929339, 0.369228, 8.70028e-08, 0.369228, -0.929339, 0, 1.89714, -2.14258 )
 environment = ExtResource( 6 )
 current = true
 fov = 55.2
