@@ -1,0 +1,6 @@
+down - InputEventJoypadMotion  axis=1 avix_value=1
+left - axis=0 axis_value=-1
+right - axis=0 axis_value=1
+up - axis=1 avix_value=-1
+start - ?
+select - ?

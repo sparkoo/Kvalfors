@@ -12,9 +12,13 @@ export var SPEED = 5
 
 var distance = 0
 
+var debug = false
+var debugMessages = []
+
 func _ready():
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	pass
+	if !debug:
+		$DebugConsole.queue_free()
 
 func _process(delta):
 	if player.playerState == player.PlayerState.RUNNING:
@@ -27,6 +31,8 @@ func gameOver():
 #	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):
+	if debug:
+		addDebug(str(event.device) + " => " + event.as_text())
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 
@@ -43,3 +49,12 @@ func cleanup():
 	var blockToDelete : Node = roadBlocks.get_children()[0]
 	roadBlocks.remove_child(blockToDelete)
 	blockToDelete.queue_free()
+
+func addDebug(message: String):
+	debugMessages.append(message)
+	if debugMessages.size() >= 5:
+		debugMessages.remove(0)
+	var debugMessage = ""
+	for msg in debugMessages:
+		debugMessage += "%s\n" % msg
+	$DebugConsole/CenterContainer/Label.text = debugMessage
