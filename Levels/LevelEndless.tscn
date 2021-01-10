@@ -15,7 +15,4 @@ collision_layer = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/GenNextDetector" index="0"]
 shape = SubResource( 1 )
-
-[node name="Player" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
 [connection signal="body_entered" from="Level/GenNextDetector" to="." method="_on_GenNextDetector_body_entered"]

@@ -44,6 +44,7 @@ func generateNext():
 	roadBlocks.add_child(nextBlock)
 	nextBlock.translate(nextPositionPointer.translation)
 	nextPositionPointer.translate(ROADBLOCK_SIZE)
+	return nextBlock
 
 func cleanup():
 	var blockToDelete : Node = roadBlocks.get_children()[0]
