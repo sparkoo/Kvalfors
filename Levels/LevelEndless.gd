@@ -23,4 +23,4 @@ func _on_GenNextDetector_body_entered(body: Node):
 func placeObstacles(nextBlock):
 	var obstacle = obstacles[randi() % obstacles.size()].instance()
 	nextBlock.add_child(obstacle)
-	obstacle.translate(Vector3((randi() % 3) - 1, 0, 0))
+	obstacle.translate(Vector3((randi() % 3) - 1, 0, randi() % 10))
