@@ -60,9 +60,11 @@ visible = false
 
 [node name="PlayGui" parent="Gui" instance=ExtResource( 4 )]
 
-[node name="DebugConsole" type="CanvasLayer" parent="."]
+[node name="Debug" type="Node" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="DebugConsole"]
+[node name="DebugConsole" type="CanvasLayer" parent="Debug"]
+
+[node name="CenterContainer" type="CenterContainer" parent="Debug/DebugConsole"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -70,7 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="DebugConsole/CenterContainer"]
+[node name="Label" type="Label" parent="Debug/DebugConsole/CenterContainer"]
 margin_left = 512.0
 margin_top = 283.0
 margin_right = 512.0
@@ -81,3 +83,7 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DebugSideCamera" type="Camera" parent="Debug"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4073, 3.021, 9.1795 )
+fov = 144.2

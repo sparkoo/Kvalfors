@@ -11,6 +11,9 @@ extents = Vector3( 1.5, 2, 0.5 )
 [node name="LevelEndless" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="MeshInstance" parent="Level/NextPosition" index="0"]
+visible = false
+
 [node name="GenNextDetector" type="Area" parent="Level" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 10 )
 collision_layer = 4
@@ -19,11 +22,11 @@ collision_layer = 4
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Level/GenNextDetector" index="1"]
+visible = false
 mesh = SubResource( 2 )
 material/0 = null
-
-[node name="Camera2" type="Camera" parent="Env" index="2"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -21.4073, 3.021, 9.1795 )
-current = true
-fov = 144.2
 [connection signal="body_entered" from="Level/GenNextDetector" to="." method="_on_GenNextDetector_body_entered"]
+
+[editable path="Level/RoadBlocks/RoadBlock0"]
+
+[editable path="Level/RoadBlocks/RoadBlock1"]

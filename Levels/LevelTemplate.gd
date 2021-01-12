@@ -23,12 +23,15 @@ var debugMessages = []
 func _ready():
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if !debug:
-		$DebugConsole.queue_free()
+		$Debug.queue_free()
 	$Player.start()
+
+var rotated = false
 
 func _process(delta):
 	if player.playerState == player.PlayerState.RUNNING:
-		movable.translate(Vector3(0, 0, SPEED * delta * -1))
+		
+		movable.translate(Vector3(0, 0, -SPEED * delta))
 		distance += SPEED * delta
 		$Gui/PlayGui.playerDistanceUpdate(distance)
 
@@ -70,4 +73,4 @@ func addDebug(message: String):
 	var debugMessage = ""
 	for msg in debugMessages:
 		debugMessage += "%s\n" % msg
-	$DebugConsole/CenterContainer/Label.text = debugMessage
+	$Debug/DebugConsole/CenterContainer/Label.text = debugMessage
