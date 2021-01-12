@@ -1,12 +1,17 @@
 extends Spatial
 
 const ROADBLOCK_SIZE = Vector3(0, 0, 10)
+#const CURVE_ROT_X = 0.0872664626 # 5`
+const CURVE_ROT_X = 0.01745329252 # 1`
+
 var roadBlockResource = load("res://LevelBits/RoadBlock.tscn")
 
 onready var roadBlocks = $Level/RoadBlocks
 onready var nextPositionPointer = $Level/NextPosition
 onready var movable = $Level
 onready var player = $Player
+
+
 
 export var SPEED = 5
 
@@ -43,8 +48,14 @@ func gameStateChanged(newstate):
 func generateNext():
 	var nextBlock: StaticBody = roadBlockResource.instance()
 	roadBlocks.add_child(nextBlock)
+	
 	nextBlock.translate(nextPositionPointer.translation)
+	
+	nextPositionPointer.rotate_x(CURVE_ROT_X)
 	nextPositionPointer.translate(ROADBLOCK_SIZE)
+	
+	nextBlock.rotate_x(nextPositionPointer.rotation.x)
+	
 	return nextBlock
 
 func cleanup():

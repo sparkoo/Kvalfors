@@ -7,16 +7,17 @@ var obstacles = [
 ]
 
 func _ready():
-	for n in range(2):
+	for n in range(10):
 		generateNext()
 
 func moveGenDetector():
+	$Level/GenNextDetector.rotate_x(CURVE_ROT_X)
 	$Level/GenNextDetector.translate(ROADBLOCK_SIZE)
 
 
 func _on_GenNextDetector_body_entered(body: Node):
 	var nextBlock = generateNext()
-	placeObstacles(nextBlock)
+#	placeObstacles(nextBlock)
 	moveGenDetector()
 	cleanup()
 
