@@ -19,6 +19,7 @@ func _ready():
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if !debug:
 		$DebugConsole.queue_free()
+	$Player.start()
 
 func _process(delta):
 	if player.playerState == player.PlayerState.RUNNING:

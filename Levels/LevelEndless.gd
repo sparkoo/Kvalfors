@@ -9,7 +9,6 @@ var obstacles = [
 func _ready():
 	for n in range(2):
 		generateNext()
-	$Player.start()
 
 func moveGenDetector():
 	$Level/GenNextDetector.translate(ROADBLOCK_SIZE)
