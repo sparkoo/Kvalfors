@@ -24,7 +24,9 @@ var currentLine = 0
 var distance = 0.0
 
 func _ready():
-	run()
+	$PlayerModel/AnimationPlayer.get_animation("run").loop = true
+	$PlayerModel/AnimationPlayer.get_animation("idle").loop = true
+	animateAction("idle")
 
 func _physics_process(delta: float):
 	if playerState == PlayerState.RUNNING:
@@ -88,6 +90,11 @@ func moveToMotion(from: float, to: float, speed: float, delta: float, tolerance:
 	else:
 		return 0
 
+func start():
+	playerState = PlayerState.RUNNING
+	playerActiveState = PlayerActiveState.RUNNING
+	animateAction("run")
+
 func run():
 	playerState = PlayerState.RUNNING
 	playerActiveState = PlayerActiveState.RUNNING
@@ -128,7 +135,7 @@ func hit():
 
 func idle():
 	playerState = PlayerState.IDLE
-	animateAction("run")
+	animateAction("idle")
 
 func resetHeight():
 	var camera_transform = $Camera.global_transform
