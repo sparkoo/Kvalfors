@@ -33,6 +33,7 @@ func _physics_process(delta: float):
 		move(delta)
 	else:
 		motion.y += G
+		motion.x = 0
 	
 	move_and_slide(motion, UP)
 
