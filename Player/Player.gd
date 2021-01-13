@@ -32,14 +32,15 @@ func _physics_process(delta: float):
 	if playerState == PlayerState.RUNNING:
 		move(delta)
 	else:
-		motion.y += G
 		motion.x = 0
+		motion.y += G
 	
-	move_and_slide(motion, UP)
+	move_and_slide(motion, UP, true)	# stop on slope false to stop Z movement
 
 func move(delta: float):
 	handleSideMoves(delta)
 	handleVerticalMoves(delta)
+	motion.z = -global_transform.origin.z	# autocorrect Z
 
 func handleSideMoves(delta):
 	# allow change lines only when running

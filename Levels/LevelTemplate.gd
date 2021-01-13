@@ -24,6 +24,8 @@ func _ready():
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if !debug:
 		$Debug.queue_free()
+	else:
+		get_tree().debug_collisions_hint = true
 	$Player.start()
 
 func _physics_process(delta):
