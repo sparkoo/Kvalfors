@@ -8,7 +8,8 @@ var obstacles = [
 
 func _ready():
 	for n in range(10):
-		generateNext()
+		var nextBlock = generateNext()
+		placeObstacles(nextBlock)
 
 func moveGenDetector():
 	$LevelRotationMidpoint/Level/GenNextDetector.rotate_x(CURVE_ROT_X)
@@ -17,7 +18,7 @@ func moveGenDetector():
 
 func _on_GenNextDetector_body_entered(body: Node):
 	var nextBlock = generateNext()
-#	placeObstacles(nextBlock)
+	placeObstacles(nextBlock)
 	moveGenDetector()
 	cleanup()
 

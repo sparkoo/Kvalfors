@@ -3,6 +3,7 @@ extends Spatial
 const ROADBLOCK_SIZE = Vector3(0, 0, 10)
 #const CURVE_ROT_X = 0.0872664626 # 5`
 const CURVE_ROT_X = 0.01745329252 # 1`
+const SPEED_MPERS = 10
 
 var roadBlockResource = load("res://LevelBits/RoadBlock.tscn")
 
@@ -10,10 +11,6 @@ onready var roadBlocks = $LevelRotationMidpoint/Level/RoadBlocks
 onready var nextPositionPointer = $LevelRotationMidpoint/Level/NextPosition
 onready var movable = $LevelRotationMidpoint
 onready var player = $Player
-
-
-
-export var SPEED = 5
 
 var distance = 0
 
@@ -30,9 +27,8 @@ func _ready():
 
 func _physics_process(delta):
 	if player.playerState == player.PlayerState.RUNNING:
-		#movable.translate(Vector3(0, 0, -SPEED * delta))
-		movable.rotate_x(-0.01 * delta)
-#		distance += SPEED * delta
+		movable.rotate_x(-CURVE_ROT_X * delta)
+		distance += SPEED_MPERS * delta
 		$Gui/PlayGui.playerDistanceUpdate(distance)
 
 func gameOver():
