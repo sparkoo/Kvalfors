@@ -2,7 +2,7 @@ extends Spatial
 
 const ROADBLOCK_SIZE = Vector3(0, 0, 10)
 #const CURVE_ROT_X = 0.0872664626 # 5`
-const CURVE_ROT_X = 0.01745329252 # 1`
+const CURVE_ROT_X = 0.01745329252 # 1` 10m/s
 const SPEED_MPERS = 10
 
 var roadBlockResource = load("res://LevelBits/RoadBlock.tscn")
