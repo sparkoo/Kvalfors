@@ -6,9 +6,9 @@ const CURVE_ROT_X = 0.01745329252 # 1`
 
 var roadBlockResource = load("res://LevelBits/RoadBlock.tscn")
 
-onready var roadBlocks = $Level/RoadBlocks
-onready var nextPositionPointer = $Level/NextPosition
-onready var movable = $Level
+onready var roadBlocks = $LevelRotationMidpoint/Level/RoadBlocks
+onready var nextPositionPointer = $LevelRotationMidpoint/Level/NextPosition
+onready var movable = $LevelRotationMidpoint
 onready var player = $Player
 
 
@@ -17,7 +17,7 @@ export var SPEED = 5
 
 var distance = 0
 
-var debug = false
+var debug = true
 var debugMessages = []
 
 func _ready():
@@ -26,13 +26,11 @@ func _ready():
 		$Debug.queue_free()
 	$Player.start()
 
-var rotated = false
-
-func _process(delta):
+func _physics_process(delta):
 	if player.playerState == player.PlayerState.RUNNING:
-		
-		movable.translate(Vector3(0, 0, -SPEED * delta))
-		distance += SPEED * delta
+		#movable.translate(Vector3(0, 0, -SPEED * delta))
+		movable.rotate_x(-0.01 * delta)
+#		distance += SPEED * delta
 		$Gui/PlayGui.playerDistanceUpdate(distance)
 
 func gameOver():
@@ -71,6 +69,10 @@ func addDebug(message: String):
 	if debugMessages.size() >= 5:
 		debugMessages.remove(0)
 	var debugMessage = ""
-	for msg in debugMessages:
-		debugMessage += "%s\n" % msg
+#	for msg in debugMessages:
+#		debugMessage += "%s\n" % msg
 	$Debug/DebugConsole/CenterContainer/Label.text = debugMessage
+
+
+func _on_Timer_timeout():
+	pass

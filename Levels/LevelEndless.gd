@@ -11,8 +11,8 @@ func _ready():
 		generateNext()
 
 func moveGenDetector():
-	$Level/GenNextDetector.rotate_x(CURVE_ROT_X)
-	$Level/GenNextDetector.translate(ROADBLOCK_SIZE)
+	$LevelRotationMidpoint/Level/GenNextDetector.rotate_x(CURVE_ROT_X)
+	$LevelRotationMidpoint/Level/GenNextDetector.translate(ROADBLOCK_SIZE)
 
 
 func _on_GenNextDetector_body_entered(body: Node):
