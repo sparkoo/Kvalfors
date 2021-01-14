@@ -1,6 +1,6 @@
 extends "res://Levels/LevelTemplate.gd"
 
-var obstacles = [
+var obstacleTypes = [
 	load("res://Obstacles/ObstacleBlock.tscn"),
 	load("res://Obstacles/ObstacleJump.tscn"),
 	load("res://Obstacles/ObstacleSlide.tscn")
@@ -23,6 +23,6 @@ func _on_GenNextDetector_body_entered(body: Node):
 	cleanup()
 
 func placeObstacles(nextBlock):
-	var obstacle = obstacles[randi() % obstacles.size()].instance()
+	var obstacle = obstacleTypes[randi() % obstacleTypes.size()].instance()
 	nextBlock.add_child(obstacle)
 	obstacle.translate(Vector3((randi() % 3) - 1, 0, randi() % 10))

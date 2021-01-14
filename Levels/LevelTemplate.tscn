@@ -31,8 +31,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5 )
 [node name="StartModel" parent="LevelRotationMidpoint/Level/RoadBlocks/RoadBlock1" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 
-[node name="Obstacles" type="Spatial" parent="LevelRotationMidpoint/Level"]
-
 [node name="NextPosition" type="Position3D" parent="LevelRotationMidpoint/Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 

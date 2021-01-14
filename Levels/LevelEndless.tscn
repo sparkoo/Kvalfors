@@ -9,7 +9,7 @@ extents = Vector3( 2.47534, 3.15785, 0.612592 )
 [node name="LevelEndless" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="GenNextDetector" type="Area" parent="LevelRotationMidpoint/Level" index="3"]
+[node name="GenNextDetector" type="Area" parent="LevelRotationMidpoint/Level" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 collision_layer = 4
 
