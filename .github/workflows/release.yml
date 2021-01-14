@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Export Game Job
     steps:
+    - name: install android tooling
+      run: sudo apt-get install android-tools-adb openjdk-8-jdk
     - name: checkout
       uses: actions/checkout@v2.3.1
       with:
