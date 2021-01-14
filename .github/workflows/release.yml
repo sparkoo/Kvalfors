@@ -21,7 +21,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: copy editor settings
-      run: mkdir -p ~/.config/godot && cp /home/runner/work/Kvalfors/Kvalfors/.config/editor_settings-3.tres ~/.config/godot/editor_settings-3.tres
+      run: mkdir -p ~/.config/godot && cp /home/runner/work/Kvalfors/Kvalfors/.config/godot/editor_settings-3.tres ~/.config/godot/editor_settings-3.tres
     - name: get tag from version
       id: tag_version
       run: |
