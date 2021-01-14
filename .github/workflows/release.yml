@@ -12,8 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Export Game Job
     steps:
-    - name: install android tooling
-      run: sudo apt-get install android-tools-adb openjdk-8-jdk
+    - run: sudo apt-get install android-tools-adb openjdk-8-jdk
+    - run: keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
+    - run: mkdir -p ~/.android && cp debug.keystore ~/.android/debug.keystore
     - name: checkout
       uses: actions/checkout@v2.3.1
       with:
