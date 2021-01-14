@@ -12,13 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Export Game Job
     steps:
-    - run: sudo apt-get install android-tools-adb openjdk-8-jdk
-    - run: keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
-    - run: mkdir -p ~/.android && cp debug.keystore ~/.android/debug.keystore
+    - name: install Android tooling
+      run: sudo apt-get install android-tools-adb openjdk-8-jdk
+    - name: generate android keystore
+      run: keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12 && mkdir -p ~/.android && cp debug.keystore ~/.android/debug.keystore
     - name: checkout
       uses: actions/checkout@v2.3.1
       with:
         fetch-depth: 0
+    - name: copy editor settings
+      run: mkdir -p ~/.config/godot && cp /home/runner/work/Kvalfors/Kvalfors/.config/editor_settings-3.tres ~/.config/godot/editor_settings-3.tres
     - name: get tag from version
       id: tag_version
       run: |
@@ -33,3 +36,4 @@ jobs:
         base_version:  ${{ steps.tag_version.outputs.TAG_VERSION}} 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        LANG: en
