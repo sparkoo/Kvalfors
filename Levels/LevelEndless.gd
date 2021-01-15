@@ -3,7 +3,8 @@ extends "res://Levels/LevelTemplate.gd"
 var obstacleTypes = [
 	load("res://Obstacles/ObstacleBlock.tscn"),
 	load("res://Obstacles/ObstacleJump.tscn"),
-	load("res://Obstacles/ObstacleSlide.tscn")
+	load("res://Obstacles/ObstacleSlide.tscn"),
+	load("res://Obstacles/ObstacleCar.tscn")
 ]
 
 func _ready():
