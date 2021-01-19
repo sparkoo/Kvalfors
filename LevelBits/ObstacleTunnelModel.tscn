@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/models/UV.material" type="Material" id=1]
 
-[sub_resource type="ArrayMesh" id=1]
+[sub_resource type="ArrayMesh" id=5]
 resource_name = "ObstacleTunnelModel"
 surfaces/0 = {
 "aabb": AABB( -4.07456, -1.78079, -2.03818, 8.20957, 2.44138, 4.07635 ),
@@ -19,5 +19,5 @@ surfaces/0 = {
 
 [node name="ObstacleTunnelModel" type="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
-mesh = SubResource( 1 )
+mesh = SubResource( 5 )
 material/0 = null

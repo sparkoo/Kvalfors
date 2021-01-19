@@ -43,6 +43,8 @@ func _ready():
 		$Debug.queue_free()
 	else:
 		get_tree().debug_collisions_hint = true
+		
+	moveCamera(camera_default_position)
 	$Player.start()
 
 func _physics_process(delta):

@@ -8,4 +8,4 @@ func _on_Exit_pressed():
 
 func startGame():
 	randomize()
-	get_tree().change_scene("res://Levels/LevelTunnel.tscn")
+	get_tree().change_scene("res://Levels/LevelEndless.tscn")
