@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Gui/GameOver.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Levels/LevelTemplate.gd" type="Script" id=3]
 [ext_resource path="res://Gui/PlayGui.tscn" type="PackedScene" id=4]
-[ext_resource path="res://LevelBits/RoadBlock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://LevelBits/RoadBlock3.tscn" type="PackedScene" id=5]
 [ext_resource path="res://default_env.tres" type="Environment" id=6]
 [ext_resource path="res://Gui/Theme.tres" type="Theme" id=7]
 [ext_resource path="res://assets/models/StartModel.glb" type="PackedScene" id=8]
+[ext_resource path="res://LevelBits/RoadBlock1.tscn" type="PackedScene" id=9]
 
 [node name="LevelTemplate" type="Spatial" groups=[
 "game",
@@ -22,7 +23,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 572.945, 0 )
 
 [node name="RoadBlocks" type="Spatial" parent="LevelRotationMidpoint/Level"]
 
-[node name="RoadBlock0" parent="LevelRotationMidpoint/Level/RoadBlocks" instance=ExtResource( 5 )]
+[node name="RoadBlock0" parent="LevelRotationMidpoint/Level/RoadBlocks" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15 )
 
 [node name="RoadBlock1" parent="LevelRotationMidpoint/Level/RoadBlocks" instance=ExtResource( 5 )]
