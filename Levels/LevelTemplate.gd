@@ -5,7 +5,11 @@ const ROADBLOCK_SIZE = Vector3(0, 0, 10)
 const CURVE_ROT_X = 0.01745329252 # 1` 10m/s
 const SPEED_MPERS = 10
 
-var roadBlockResource = load("res://LevelBits/RoadBlock.tscn")
+var roadBlocksResources = [
+	load("res://LevelBits/RoadBlock1.tscn"),
+	load("res://LevelBits/RoadBlock2.tscn"),
+	load("res://LevelBits/RoadBlock3.tscn")
+]
 
 onready var roadBlocks = $LevelRotationMidpoint/Level/RoadBlocks
 onready var nextPositionPointer = $LevelRotationMidpoint/Level/NextPosition
@@ -45,7 +49,7 @@ func gameStateChanged(newstate):
 	print("hohoho")
 
 func generateNext():
-	var nextBlock: StaticBody = roadBlockResource.instance()
+	var nextBlock: StaticBody = roadBlocksResources[randi() % roadBlocksResources.size()].instance()
 	roadBlocks.add_child(nextBlock)
 	
 	nextBlock.translate(nextPositionPointer.translation)
