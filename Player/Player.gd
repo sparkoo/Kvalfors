@@ -131,15 +131,9 @@ func animateAction(action, queue: bool = false):
 
 func hit():
 	playerState = PlayerState.DEAD
-#	resetHeight()
 	animateAction("die")
 	get_tree().call_group("game", "gameOver")
 
 func idle():
 	playerState = PlayerState.IDLE
 	animateAction("idle")
-
-func resetHeight():
-	var camera_transform = $Camera.global_transform
-	translation.y = NORMAL_HEIGHT
-	$Camera.global_transform = camera_transform
