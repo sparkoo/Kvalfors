@@ -7,4 +7,5 @@ func _on_Exit_pressed():
 	get_tree().quit()
 
 func startGame():
+	randomize()
 	get_tree().change_scene("res://Levels/LevelEndless.tscn")
