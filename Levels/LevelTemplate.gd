@@ -6,12 +6,13 @@ const CURVE_ROT_X = 0.01745329252 # 1` 10m/s
 const SPEED_MPERS = 10
 
 # camera controls
-onready var camera_default_position = $Env/Camera.transform
-onready var camera_tunnel_position = $Env/CameraTunnel.transform
-var camera_movement = 0.0
-var camera_target
-var camera_moving = false
-var camera_speed = 1
+onready var camera = $Env/Camera
+onready var cameraDefaultPosition = $Env/CamPosDefault.transform
+onready var cameraTunnelPosition = $Env/CamPosTunnel.transform
+const CAMERA_MOVEMENT_SPEED = 1
+var cameraMovement = 0.0
+var cameraTarget
+var cameraMoving = false
 
 var roadBlocksResources = [
 	load("res://LevelBits/RoadBlock1.tscn"),
@@ -43,8 +44,7 @@ func _ready():
 		$Debug.queue_free()
 	else:
 		get_tree().debug_collisions_hint = true
-		
-	moveCamera(camera_default_position)
+	moveCamera(cameraDefaultPosition)
 	$Player.start()
 
 func _physics_process(delta):
@@ -53,11 +53,11 @@ func _physics_process(delta):
 		distance += SPEED_MPERS * delta
 		$Gui/PlayGui.playerDistanceUpdate(distance)
 	
-	if camera_moving:
-		camera_movement += camera_speed * delta
-		$Env/Camera.transform = $Env/Camera.transform.interpolate_with(camera_target, camera_movement)
-		if camera_movement >= 1.0:
-			camera_moving = false
+	if cameraMoving:
+		cameraMovement += CAMERA_MOVEMENT_SPEED * delta
+		camera.transform = camera.transform.interpolate_with(cameraTarget, cameraMovement)
+		if cameraMovement >= 1.0:
+			cameraMoving = false
 
 func gameOver():
 	$GameOver/Popup.popup_centered()
@@ -105,12 +105,12 @@ func _on_Timer_timeout():
 
 
 func lowerCam():
-	moveCamera(camera_tunnel_position)
+	moveCamera(cameraTunnelPosition)
 
 func defaultCam():
-	moveCamera(camera_default_position)
+	moveCamera(cameraDefaultPosition)
 
 func moveCamera(targetPosition: Transform):
-	camera_movement = 0.0
-	camera_target = targetPosition
-	camera_moving = true
+	cameraMovement = 0.0
+	cameraTarget = targetPosition
+	cameraMoving = true
