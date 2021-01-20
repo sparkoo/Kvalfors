@@ -115,10 +115,10 @@ func cancelSlide():
 	$PlayerModel/AnimationPlayer.play_backwards("slide")
 	$Timers/SlideTimer.stop()
 	run()
-	animateAction("run", true)
 
 func _on_SlideTimer_timeout():
-	cancelSlide()
+	if playerState == PlayerState.RUNNING:
+		cancelSlide()
 
 
 func animateAction(action, queue: bool = false):
@@ -131,6 +131,7 @@ func animateAction(action, queue: bool = false):
 
 func hit():
 	playerState = PlayerState.DEAD
+	$CollisionShape.shape.extents.y = NORMAL_SHAPE_HEIGHT
 	animateAction("die")
 	get_tree().call_group("game", "gameOver")
 
