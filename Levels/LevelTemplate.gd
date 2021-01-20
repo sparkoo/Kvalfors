@@ -28,7 +28,9 @@ var obstacleTypes = [
 	load("res://Obstacles/ObstacleTunnel.tscn"),
 	load("res://Obstacles/ObstacleBarrel.tscn"),
 	load("res://Obstacles/ObstacleBarrelStack.tscn"),
-	load("res://Obstacles/ObstacleCrossingGate.tscn")
+	load("res://Obstacles/ObstacleCrossingGate.tscn"),
+	load("res://Obstacles/ObstacleBox.tscn"),
+	load("res://Obstacles/ObstacleBoxStack.tscn")
 ]
 
 onready var roadBlocks = $LevelRotationMidpoint/Level/RoadBlocks
