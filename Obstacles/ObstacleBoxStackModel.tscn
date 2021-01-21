@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/models/UV.material" type="Material" id=1]
 
-[sub_resource type="ArrayMesh" id=1]
+[sub_resource type="ArrayMesh" id=10]
 resource_name = "ObstacleBoxStackModel"
 surfaces/0 = {
 "aabb": AABB( -0.5, 0, -0.650836, 2.09745, 2.00197, 1.30167 ),
@@ -18,5 +18,5 @@ surfaces/0 = {
 }
 
 [node name="ObstacleBoxStackModel" type="MeshInstance"]
-mesh = SubResource( 1 )
+mesh = SubResource( 10 )
 material/0 = null

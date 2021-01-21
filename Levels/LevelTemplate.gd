@@ -40,7 +40,7 @@ onready var player = $Player
 
 var distance = 0
 
-export var debug = false
+export var debug = true
 var debugMessages = []
 
 func _ready():

@@ -19,4 +19,12 @@ func _on_GenNextDetector_body_entered(body: Node):
 func placeObstacles(nextBlock):
 	var obstacle = obstacleTypes[randi() % obstacleTypes.size()].instance()
 	nextBlock.add_child(obstacle)
-	obstacle.translate(Vector3(0, 0, 5))
+	var x
+	if obstacle.linesWidth == 3:
+		x = 0
+	elif obstacle.linesWidth == 2:
+		x = (randi() % 2) - 1
+	elif obstacle.linesWidth == 1:
+		x = (randi() % 3) - 1
+	
+	obstacle.translate(Vector3(x, 0, 5))

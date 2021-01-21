@@ -7,10 +7,10 @@
 extents = Vector3( 1, 1, 0.5 )
 
 [node name="ObstacleBarrelStack" instance=ExtResource( 2 )]
+linesWidth = 2
 
 [node name="CollisionShape" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0 )
 shape = SubResource( 1 )
 
 [node name="ObstacleBarrelStackModel" parent="." index="1" instance=ExtResource( 1 )]
-visible = true

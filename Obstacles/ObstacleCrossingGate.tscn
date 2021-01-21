@@ -10,6 +10,7 @@ extents = Vector3( 0.5, 0.5, 0.1 )
 extents = Vector3( 1, 0.1, 0.1 )
 
 [node name="ObstacleCrossingGate" instance=ExtResource( 2 )]
+linesWidth = 3
 
 [node name="CollisionShape" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 0 )
