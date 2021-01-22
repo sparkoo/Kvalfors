@@ -5,6 +5,8 @@ const ROADBLOCK_SIZE = Vector3(0, 0, 10)
 const CURVE_ROT_X = 0.01745329252 # 1` 10m/s
 const SPEED_MPERS = 10
 
+var speed = 1
+
 # camera controls
 onready var camera = $Env/Camera
 onready var cameraDefaultPosition = $Env/CamPosDefault.transform
@@ -20,25 +22,13 @@ var roadBlocksResources = [
 	load("res://LevelBits/RoadBlock3.tscn")
 ]
 
-var obstacleTypes = [
-	load("res://Obstacles/ObstacleBlock.tscn"),
-	load("res://Obstacles/ObstacleJump.tscn"),
-	load("res://Obstacles/ObstacleSlide.tscn"),
-	load("res://Obstacles/ObstacleCar.tscn"),
-	load("res://Obstacles/ObstacleTunnel.tscn"),
-	load("res://Obstacles/ObstacleBarrel.tscn"),
-	load("res://Obstacles/ObstacleBarrelStack.tscn"),
-	load("res://Obstacles/ObstacleCrossingGate.tscn"),
-	load("res://Obstacles/ObstacleBox.tscn"),
-	load("res://Obstacles/ObstacleBoxStack.tscn")
-]
-
 onready var roadBlocks = $LevelRotationMidpoint/Level/RoadBlocks
 onready var nextPositionPointer = $LevelRotationMidpoint/Level/NextPosition
 onready var movable = $LevelRotationMidpoint
 onready var player = $Player
 
 var distance = 0
+var blockCounter = 0
 
 export var debug = true
 var debugMessages = []
@@ -54,8 +44,8 @@ func _ready():
 
 func _physics_process(delta):
 	if player.playerState == player.PlayerState.RUNNING:
-		movable.rotate_x(-CURVE_ROT_X * delta)
-		distance += SPEED_MPERS * delta
+		movable.rotate_x(-CURVE_ROT_X * delta * speed)
+		distance += SPEED_MPERS * delta * speed
 		$Gui/PlayGui.playerDistanceUpdate(distance)
 	
 	if cameraMoving:
@@ -78,6 +68,8 @@ func gameStateChanged(newstate):
 	print("hohoho")
 
 func generateNext():
+	blockCounter += 1
+	
 	var nextBlock: StaticBody = roadBlocksResources[randi() % roadBlocksResources.size()].instance()
 	roadBlocks.add_child(nextBlock)
 	

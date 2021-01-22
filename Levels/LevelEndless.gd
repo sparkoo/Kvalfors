@@ -1,9 +1,16 @@
 extends "res://Levels/LevelTemplate.gd"
 
+onready var obstacleGenerator : ObstacleGenerator = preload("LevelEndlessObstacleGenerator.gd").new()
+
+var obstacleFreq = 1
+
 func _ready():
+	obstacleGenerator.init(obstacleFreq)
 	for n in range(10):
 		var nextBlock = generateNext()
-		placeObstacles(nextBlock)
+		if n > 2:
+			obstacleGenerator.placeObstacles(nextBlock, blockCounter)
+
 
 func moveGenDetector():
 	$LevelRotationMidpoint/Level/GenNextDetector.rotate_x(CURVE_ROT_X)
@@ -12,19 +19,7 @@ func moveGenDetector():
 
 func _on_GenNextDetector_body_entered(body: Node):
 	var nextBlock = generateNext()
-	placeObstacles(nextBlock)
+	obstacleGenerator.placeObstacles(nextBlock, blockCounter)
 	moveGenDetector()
 	cleanup()
 
-func placeObstacles(nextBlock):
-	var obstacle = obstacleTypes[randi() % obstacleTypes.size()].instance()
-	nextBlock.add_child(obstacle)
-	var x
-	if obstacle.linesWidth == 3:
-		x = 0
-	elif obstacle.linesWidth == 2:
-		x = (randi() % 2) - 1
-	elif obstacle.linesWidth == 1:
-		x = (randi() % 3) - 1
-	
-	obstacle.translate(Vector3(x, 0, 5))
