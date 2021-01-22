@@ -17,6 +17,7 @@ func moveGenDetector():
 	$LevelRotationMidpoint/Level/GenNextDetector.translate(ROADBLOCK_SIZE)
 
 
+# warning-ignore:unused_argument
 func _on_GenNextDetector_body_entered(body: Node):
 	var nextBlock = generateNext()
 	obstacleGenerator.placeObstacles(nextBlock, blockCounter)
