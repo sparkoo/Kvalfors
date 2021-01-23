@@ -4,7 +4,9 @@ class_name ObstacleGenerator
 
 const BLOCK = "block"
 const JUMP = "jump"
+const JUMP_WIDE = "jumpWide"
 const SLIDE = "slide"
+const SLIDE_WIDE = "slideWide"
 const CAR = "car"
 const TUNNEL = "tunnel"
 const BARREL = "barrel"
@@ -16,14 +18,17 @@ const BOX_STACK = "boxStack"
 var obstacleTypes = {
 	BLOCK: load("res://Obstacles/ObstacleBlock.tscn"),
 	JUMP: load("res://Obstacles/ObstacleJump.tscn"),
+	JUMP_WIDE: load("res://Obstacles/ObstacleJumpWide.tscn"),
 	SLIDE: load("res://Obstacles/ObstacleSlide.tscn"),
+	SLIDE_WIDE: load("res://Obstacles/ObstacleSlideWide.tscn"),
 	CAR: load("res://Obstacles/ObstacleCar.tscn"),
 	TUNNEL: load("res://Obstacles/ObstacleTunnel.tscn"),
 	BARREL: load("res://Obstacles/ObstacleBarrel.tscn"),
 	BARREL_STACK: load("res://Obstacles/ObstacleBarrelStack.tscn"),
 	CROSSING_GATE: load("res://Obstacles/ObstacleCrossingGate.tscn"),
 	BOX: load("res://Obstacles/ObstacleBox.tscn"),
-	BOX_STACK: load("res://Obstacles/ObstacleBoxStack.tscn")
+	BOX_STACK: load("res://Obstacles/ObstacleBoxStack.tscn"),
+	
 }
 
 var oneLineObstacles = {
@@ -38,6 +43,8 @@ var oneLineObstacles = {
 var level0Obstacles: Dictionary
 var level1Obstacles: Dictionary
 var level2Obstacles: Dictionary
+var level3Obstacles: Dictionary
+var level4Obstacles: Dictionary
 
 func init():
 	level0Obstacles = oneLineObstacles.duplicate()
@@ -48,6 +55,13 @@ func init():
 	level2Obstacles = level1Obstacles.duplicate()
 	level2Obstacles[BOX_STACK] = obstacleTypes[BOX_STACK]
 	level2Obstacles[BARREL_STACK] = obstacleTypes[BARREL_STACK]
+	
+	level3Obstacles = level2Obstacles.duplicate()
+	level3Obstacles[CROSSING_GATE] = obstacleTypes[CROSSING_GATE]
+	level3Obstacles[JUMP_WIDE] = obstacleTypes[JUMP_WIDE]
+	
+	level4Obstacles = level3Obstacles.duplicate()
+	level3Obstacles[SLIDE_WIDE] = obstacleTypes[SLIDE_WIDE]
 	
 
 func placeObstacles(nextBlock : StaticBody, blockCounter : int, difficulty : int = 0):
@@ -100,9 +114,7 @@ func level0(nextBlock: StaticBody, blockCounter: int):
 
 func level1(nextBlock: StaticBody, blockCounter: int):
 	var x
-	if blockCounter % 4 == 0:
-		x = 0
-	else:
+	if blockCounter % 4 != 0:
 		return
 	
 	var obstacleKey = getRandomKey(level1Obstacles)
@@ -112,9 +124,7 @@ func level1(nextBlock: StaticBody, blockCounter: int):
 
 func level2(nextBlock : StaticBody, blockCounter : int):
 	var x
-	if blockCounter % 4 == 0:
-		x = 0
-	else:
+	if blockCounter % 4 != 0:
 		return
 	
 	var obstacleKey = getRandomKey(level2Obstacles)
@@ -128,22 +138,16 @@ func level2(nextBlock : StaticBody, blockCounter : int):
 
 func level3(nextBlock : StaticBody, blockCounter : int):
 	var x
-	var obstacle
-	if blockCounter % 4 == 0:
-		var obstacleKey = getRandomKey(level2Obstacles)
-		if obstacleKey == BOX_STACK || obstacleKey == BARREL_STACK:
-			x = (randi() % 2) - 1
-		else:
-			x = 0
-		
-		obstacle = level2Obstacles.get(obstacleKey).instance()
-	elif blockCounter % 2 == 0:
-		var obstacleKey = getRandomKey(oneLineObstacles)
-		x = (randi() % 3) - 1
-		obstacle = oneLineObstacles.get(obstacleKey).instance()
-	else:
+	if blockCounter % 4 != 0:
 		return
 	
+	var obstacleKey = getRandomKey(level3Obstacles)
+	if obstacleKey == BOX_STACK || obstacleKey == BARREL_STACK:
+		x = (randi() % 2) - 1
+	else:
+		x = 0
+	
+	var obstacle = level3Obstacles.get(obstacleKey).instance()
 	putObstacle(nextBlock, obstacle, Vector3(x, 0, 8 - (randi() % 5)))
 
 func level4(nextBlock : StaticBody, blockCounter : int):
