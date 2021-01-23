@@ -1,5 +1,7 @@
 extends Area
 
+class_name Obstacle
+
 export var linesWidth = 1
 
 

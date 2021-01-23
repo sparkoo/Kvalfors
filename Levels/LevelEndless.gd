@@ -2,10 +2,10 @@ extends "res://Levels/LevelTemplate.gd"
 
 onready var obstacleGenerator : ObstacleGenerator = preload("LevelEndlessObstacleGenerator.gd").new()
 
-var obstacleFreq = 1
+export var difficulty = 1
 
 func _ready():
-	obstacleGenerator.init(obstacleFreq)
+	speed = 0.5
 	for n in range(10):
 		var nextBlock = generateNext()
 		if n > 2:
@@ -19,8 +19,8 @@ func moveGenDetector():
 
 # warning-ignore:unused_argument
 func _on_GenNextDetector_body_entered(body: Node):
-	var nextBlock = generateNext()
-	obstacleGenerator.placeObstacles(nextBlock, blockCounter)
+	var nextBlock : StaticBody = generateNext()
+	obstacleGenerator.placeObstacles(nextBlock, blockCounter, difficulty)
 	moveGenDetector()
 	cleanup()
 

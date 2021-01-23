@@ -67,7 +67,7 @@ func _input(event):
 func gameStateChanged(newstate):
 	print("hohoho")
 
-func generateNext():
+func generateNext() -> StaticBody:
 	blockCounter += 1
 	
 	var nextBlock: StaticBody = roadBlocksResources[randi() % roadBlocksResources.size()].instance()
