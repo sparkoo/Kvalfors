@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Obstacles/ObstacleBarrelStackModel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Obstacles/ObstacleTemplate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Obstacles/ObstacleBarrelModel.tscn" type="PackedScene" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1, 0.5 )
@@ -13,4 +13,10 @@ linesWidth = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0 )
 shape = SubResource( 1 )
 
-[node name="ObstacleBarrelStackModel" parent="." index="1" instance=ExtResource( 1 )]
+[node name="ObstacleBarrelModel" parent="." index="1" instance=ExtResource( 3 )]
+
+[node name="ObstacleBarrelModel2" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( 0.964796, 0, 0.262998, 0, 1, 0, -0.262998, 0, 0.964796, 1.05386, 0.5, 0 )
+
+[node name="ObstacleBarrelModel3" parent="." index="3" instance=ExtResource( 3 )]
+transform = Transform( 0.00213619, 0.799997, 0, -0.799997, 0.00213619, 0, 0, 0, 0.8, 0.534056, 1.38063, 0.00958109 )
