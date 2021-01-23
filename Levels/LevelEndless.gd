@@ -2,14 +2,15 @@ extends "res://Levels/LevelTemplate.gd"
 
 onready var obstacleGenerator : ObstacleGenerator = preload("LevelEndlessObstacleGenerator.gd").new()
 
-export var difficulty = 1
+export var difficulty = 3
 
 func _ready():
-	speed = 0.5
+	obstacleGenerator.init()
+	speed = 1
 	for n in range(10):
 		var nextBlock = generateNext()
 		if n > 2:
-			obstacleGenerator.placeObstacles(nextBlock, blockCounter)
+			obstacleGenerator.placeObstacles(nextBlock, blockCounter, difficulty)
 
 
 func moveGenDetector():
