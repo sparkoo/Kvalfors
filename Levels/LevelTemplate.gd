@@ -64,9 +64,9 @@ func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 	if event.is_action_pressed("diffPlus"):
-		get_tree().call_group("level", "diffPlus")
+		get_tree().call_group("level", "updateDifficultyBy", +1)
 	if event.is_action_pressed("diffMinus"):
-		get_tree().call_group("level", "diffPlus")
+		get_tree().call_group("level", "updateDifficultyBy", -1)
 
 func gameStateChanged(newstate):
 	print("hohoho")

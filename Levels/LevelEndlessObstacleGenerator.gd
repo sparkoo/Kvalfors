@@ -40,6 +40,20 @@ var oneLineObstacles = {
 	BOX: obstacleTypes[BOX]
 }
 
+var multiLineObstacles = {
+	JUMP_WIDE: obstacleTypes[JUMP_WIDE],
+	SLIDE_WIDE: obstacleTypes[SLIDE_WIDE],
+	BARREL_STACK: obstacleTypes[BARREL_STACK],
+	CROSSING_GATE: obstacleTypes[CROSSING_GATE],
+	BOX_STACK: obstacleTypes[BOX_STACK],
+	TUNNEL: obstacleTypes[TUNNEL]
+}
+
+var block = {
+	BLOCK: obstacleTypes[BLOCK]
+}
+
+var oneLinersWithoutBlock: Dictionary
 var level0Obstacles: Dictionary
 var level1Obstacles: Dictionary
 var level2Obstacles: Dictionary
@@ -47,6 +61,9 @@ var level3Obstacles: Dictionary
 var level4Obstacles: Dictionary
 
 func init():
+	oneLinersWithoutBlock = oneLineObstacles.duplicate()
+	oneLinersWithoutBlock.erase(BLOCK)
+	
 	level0Obstacles = oneLineObstacles.duplicate()
 	level0Obstacles[TUNNEL] = obstacleTypes[TUNNEL]
 	
@@ -61,43 +78,53 @@ func init():
 	level3Obstacles[JUMP_WIDE] = obstacleTypes[JUMP_WIDE]
 	
 	level4Obstacles = level3Obstacles.duplicate()
-	level3Obstacles[SLIDE_WIDE] = obstacleTypes[SLIDE_WIDE]
+	level4Obstacles[SLIDE_WIDE] = obstacleTypes[SLIDE_WIDE]
 	
 
 func placeObstacles(nextBlock : StaticBody, blockCounter : int, difficulty : int = 0):
+	if difficulty >= 1 and difficulty <= 5:
+		if blockCounter % 4 != 0:
+			return
+	elif difficulty == 6:
+		if blockCounter % 3 != 0:
+			return
+	elif difficulty == 7:
+		if blockCounter % 2 != 0:
+			return
+	
 	match difficulty:
 		0:
 			level0(nextBlock, blockCounter)
 		1:
 			level1(nextBlock, blockCounter)
 		2:
-			level2(nextBlock, blockCounter)
+			randObstacles(nextBlock, level2Obstacles)
 		3:
-			level3(nextBlock, blockCounter)
+			randObstacles(nextBlock, level3Obstacles)
 		4:
-			level4(nextBlock, blockCounter)
+			randObstacles(nextBlock, level4Obstacles)
 		5:
-			level5(nextBlock, blockCounter)
+			randObstacles(nextBlock, level4Obstacles)
 		6:
-			level6(nextBlock, blockCounter)
+			randObstaclesWithCombos(nextBlock, level4Obstacles)
 		7:
-			level7(nextBlock, blockCounter)
+			randObstaclesWithCombos(nextBlock, level4Obstacles)
 		8:
-			level8(nextBlock, blockCounter)
+			randObstaclesWithCombos(nextBlock, level4Obstacles)
 		9:
-			level9(nextBlock, blockCounter)
+			randObstaclesWithCombos(nextBlock, level4Obstacles)
 		_:
-			level10(nextBlock, blockCounter)
+			randObstaclesWithCombos(nextBlock, level4Obstacles)
 
 func putObstacle(nextBlock: StaticBody, obstacle: Obstacle, position: Vector3):
 	nextBlock.add_child(obstacle)
 	obstacle.translate(position)
 
-func pickAndPut(nextBlock: StaticBody, obstacles: Dictionary, x: int = -1, z: int = -1):
+func pickAndPut(nextBlock: StaticBody, obstacles: Dictionary, x: int = -999, z: int = -1):
 	var obstacleKey = getRandomKey(obstacles)
 	var obstacle = obstacles.get(obstacleKey).instance()
 	
-	if x <= -1:
+	if x == -999:
 		if obstacle.linesWidth == 3:
 			x = 0
 		elif obstacle.linesWidth == 2:
@@ -119,49 +146,21 @@ func level0(nextBlock: StaticBody, blockCounter: int):
 		
 	var obstacle = level0Obstacles[obstacleKey].instance()
 	putObstacle(nextBlock, obstacle, Vector3(x, 0, 8 - (randi() % 5)))
-
-
-func level1(nextBlock: StaticBody, blockCounter: int):
-	if blockCounter % 4 != 0:
-		return
 	
+func level1(nextBlock: StaticBody, blockCounter: int):
 	pickAndPut(nextBlock, level1Obstacles, 0)
 
-func level2(nextBlock : StaticBody, blockCounter : int):
-	if blockCounter % 4 != 0:
-		return
-	
-	pickAndPut(nextBlock, level2Obstacles)
+func randObstacles(nextBlock: StaticBody, obstaclesDict: Dictionary):
+	pickAndPut(nextBlock, obstaclesDict)
 
-func level3(nextBlock : StaticBody, blockCounter : int):
-	if blockCounter % 4 != 0:
-		return
-	
-	pickAndPut(nextBlock, level3Obstacles)
-
-func level4(nextBlock : StaticBody, blockCounter : int):
-	if blockCounter % 4 != 0:
-		return
-	
-	pickAndPut(nextBlock, level4Obstacles)
-
-func level5(nextBlock : StaticBody, blockCounter : int):
-	pass
-
-func level6(nextBlock : StaticBody, blockCounter : int):
-	pass
-
-func level7(nextBlock : StaticBody, blockCounter : int):
-	pass
-
-func level8(nextBlock : StaticBody, blockCounter : int):
-	pass
-
-func level9(nextBlock : StaticBody, blockCounter : int):
-	pass
-
-func level10(nextBlock : StaticBody, blockCounter : int):
-	pass
+func randObstaclesWithCombos(nextBlock : StaticBody, obstaclesDict: Dictionary):
+	if randi() % 3 != 0:
+		pickAndPut(nextBlock, multiLineObstacles)
+	else:
+		var z = 8 - (randi() % 5)
+		pickAndPut(nextBlock, oneLinersWithoutBlock, -1)
+		pickAndPut(nextBlock, oneLineObstacles, 0)
+		pickAndPut(nextBlock, oneLinersWithoutBlock, 1)
 
 func getRandomKey(dict: Dictionary):
 	return dict.keys()[randi() % dict.size()]

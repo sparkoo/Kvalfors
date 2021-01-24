@@ -2,11 +2,12 @@ extends "res://Levels/LevelTemplate.gd"
 
 onready var obstacleGenerator : ObstacleGenerator = preload("LevelEndlessObstacleGenerator.gd").new()
 
-export var difficulty = 3
+export var difficulty = 8
 
 func _ready():
 	obstacleGenerator.init()
 	speed = 1
+	setDifficulty(difficulty)
 	for n in range(10):
 		var nextBlock = generateNext()
 		if n > 2:
@@ -25,3 +26,17 @@ func _on_GenNextDetector_body_entered(body: Node):
 	moveGenDetector()
 	cleanup()
 
+func updateDifficultyTo(newDifficulty: int):
+	setDifficulty(newDifficulty)
+
+func updateDifficultyBy(step: int):
+	setDifficulty(difficulty + step)
+
+func setDifficulty(newValue: int):
+	if newValue < 0:
+		difficulty = 0
+	elif newValue > 8:
+		difficulty = 8
+	else:
+		difficulty = newValue
+	get_tree().call_group("level", "difficultyUpdate", difficulty)
