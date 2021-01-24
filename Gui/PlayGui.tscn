@@ -4,6 +4,7 @@
 [ext_resource path="res://Gui/PlayGui.gd" type="Script" id=2]
 
 [node name="PlayGui" type="Control" groups=[
+"level",
 "player",
 ]]
 anchor_right = 1.0
@@ -22,6 +23,16 @@ margin_top = 32.0
 margin_right = -102.0
 margin_bottom = 65.0
 text = "0 m"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Difficulty" type="Label" parent="."]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 40.0
+margin_bottom = 33.0
+text = "difficulty: "
 __meta__ = {
 "_edit_use_anchors_": false
 }

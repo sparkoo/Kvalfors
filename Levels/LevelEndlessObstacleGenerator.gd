@@ -93,6 +93,22 @@ func putObstacle(nextBlock: StaticBody, obstacle: Obstacle, position: Vector3):
 	nextBlock.add_child(obstacle)
 	obstacle.translate(position)
 
+func pickAndPut(nextBlock: StaticBody, obstacles: Dictionary, x: int = -1, z: int = -1):
+	var obstacleKey = getRandomKey(obstacles)
+	var obstacle = obstacles.get(obstacleKey).instance()
+	
+	if x <= -1:
+		if obstacle.linesWidth == 3:
+			x = 0
+		elif obstacle.linesWidth == 2:
+			x = (randi() % 2) - 1
+		elif obstacle.linesWidth == 1:
+			x = (randi() % 3) - 1
+	
+	if z <= -1:
+		z = 8 - (randi() % 5)
+	
+	putObstacle(nextBlock, obstacle, Vector3(x, 0, z))
 
 func level0(nextBlock: StaticBody, blockCounter: int):
 	var obstacleKey = getRandomKey(level0Obstacles)
@@ -103,55 +119,31 @@ func level0(nextBlock: StaticBody, blockCounter: int):
 		
 	var obstacle = level0Obstacles[obstacleKey].instance()
 	putObstacle(nextBlock, obstacle, Vector3(x, 0, 8 - (randi() % 5)))
-	
-#	var x
-#	if obstacle.linesWidth == 3:
-#		x = 0
-#	elif obstacle.linesWidth == 2:
-#		x = (randi() % 2) - 1
-#	elif obstacle.linesWidth == 1:
-#		x = (randi() % 3) - 1
+
 
 func level1(nextBlock: StaticBody, blockCounter: int):
-	var x
 	if blockCounter % 4 != 0:
 		return
 	
-	var obstacleKey = getRandomKey(level1Obstacles)
-	
-	var obstacle = level1Obstacles.get(obstacleKey).instance()
-	putObstacle(nextBlock, obstacle, Vector3(x, 0, 8 - (randi() % 5)))
+	pickAndPut(nextBlock, level1Obstacles, 0)
 
 func level2(nextBlock : StaticBody, blockCounter : int):
-	var x
 	if blockCounter % 4 != 0:
 		return
 	
-	var obstacleKey = getRandomKey(level2Obstacles)
-	if obstacleKey == BOX_STACK || obstacleKey == BARREL_STACK:
-		x = (randi() % 2) - 1
-	else:
-		x = 0
-	
-	var obstacle = level2Obstacles.get(obstacleKey).instance()
-	putObstacle(nextBlock, obstacle, Vector3(x, 0, 8 - (randi() % 5)))
+	pickAndPut(nextBlock, level2Obstacles)
 
 func level3(nextBlock : StaticBody, blockCounter : int):
-	var x
 	if blockCounter % 4 != 0:
 		return
 	
-	var obstacleKey = getRandomKey(level3Obstacles)
-	if obstacleKey == BOX_STACK || obstacleKey == BARREL_STACK:
-		x = (randi() % 2) - 1
-	else:
-		x = 0
-	
-	var obstacle = level3Obstacles.get(obstacleKey).instance()
-	putObstacle(nextBlock, obstacle, Vector3(x, 0, 8 - (randi() % 5)))
+	pickAndPut(nextBlock, level3Obstacles)
 
 func level4(nextBlock : StaticBody, blockCounter : int):
-	pass
+	if blockCounter % 4 != 0:
+		return
+	
+	pickAndPut(nextBlock, level4Obstacles)
 
 func level5(nextBlock : StaticBody, blockCounter : int):
 	pass

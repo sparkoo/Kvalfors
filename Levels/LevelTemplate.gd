@@ -63,6 +63,10 @@ func _input(event):
 		addDebug(str(event.device) + " => " + event.as_text())
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
+	if event.is_action_pressed("diffPlus"):
+		get_tree().call_group("level", "diffPlus")
+	if event.is_action_pressed("diffMinus"):
+		get_tree().call_group("level", "diffPlus")
 
 func gameStateChanged(newstate):
 	print("hohoho")
