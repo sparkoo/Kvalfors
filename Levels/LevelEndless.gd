@@ -10,7 +10,7 @@ func _ready():
 	setDifficulty(difficulty)
 	for n in range(10):
 		var nextBlock = generateNext()
-		if n > 2:
+		if n >= 1:
 			obstacleGenerator.placeObstacles(nextBlock, blockCounter, difficulty)
 
 
