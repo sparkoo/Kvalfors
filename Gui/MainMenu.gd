@@ -1,8 +1,10 @@
 extends Spatial
 
+onready var difficultyLabel = $CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/Difficulty
+
 func _ready():
 	$CanvasLayer/CenterContainer/Start
-	$CanvasLayer/CenterContainer/VBoxContainer/Difficulty.text = String(Game.levelDifficulty)
+	difficultyLabel.text = String(Game.levelDifficulty)
 
 
 func _on_Start_pressed():
@@ -15,12 +17,12 @@ func _input(event):
 
 func _on_DifficultyUp_pressed():
 	Game.updateDifficultyBy(1)
-	$CanvasLayer/CenterContainer/VBoxContainer/Difficulty.text = String(Game.levelDifficulty)
+	difficultyLabel.text = String(Game.levelDifficulty)
 
 
 func _on_DifficultyDown_pressed():
 	Game.updateDifficultyBy(-1)
-	$CanvasLayer/CenterContainer/VBoxContainer/Difficulty.text = String(Game.levelDifficulty)
+	difficultyLabel.text = String(Game.levelDifficulty)
 
-
-
+func _on_Exit_pressed():
+	Game.exitGame()
