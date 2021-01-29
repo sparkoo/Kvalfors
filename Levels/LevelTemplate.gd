@@ -34,6 +34,8 @@ export var debug = false
 var debugMessages = []
 
 func _ready():
+	randomize()
+	
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if !debug:
 		$Debug.queue_free()

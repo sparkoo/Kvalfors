@@ -55,5 +55,5 @@ margin_top = 220.0
 margin_right = 326.0
 margin_bottom = 269.0
 text = "Exit"
-[connection signal="pressed" from="Popup/CenterContainer/VBoxContainer/TryAgain" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Popup/CenterContainer/VBoxContainer/TryAgain" to="." method="_on_TryAgain_pressed"]
 [connection signal="pressed" from="Popup/CenterContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

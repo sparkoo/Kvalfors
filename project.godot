@@ -35,7 +35,7 @@ config/quit_on_go_back=false
 [autoload]
 
 Utils="*res://Utils/utils.gd"
-Game="*res://Game/Game.tscn"
+Game="*res://Game/GameControl.gd"
 
 [debug]
 
