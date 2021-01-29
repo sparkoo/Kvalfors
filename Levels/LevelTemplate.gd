@@ -29,12 +29,14 @@ onready var player = $Player
 
 var distance = 0
 var blockCounter = 0
+var highScoreCelebrated = false
 
 export var debug = false
 var debugMessages = []
 
 func _ready():
 	randomize()
+	$Env/Fireworks/FireworksParticles.emitting = false
 	
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if !debug:
@@ -49,6 +51,7 @@ func _physics_process(delta):
 		movable.rotate_x(-CURVE_ROT_X * delta * speed)
 		distance += SPEED_MPERS * delta * speed
 		$Gui/PlayGui.playerDistanceUpdate(distance)
+		checkHighScore()
 	
 	if cameraMoving:
 		cameraMovement += CAMERA_MOVEMENT_SPEED * delta
@@ -93,6 +96,13 @@ func cleanup():
 	var blockToDelete : Node = roadBlocks.get_children()[0]
 	roadBlocks.remove_child(blockToDelete)
 	blockToDelete.queue_free()
+
+func checkHighScore():
+	if distance > Game.getHighScore():
+		$Gui/PlayGui.setRecord(distance)
+		if !highScoreCelebrated:
+			$Env/Fireworks.emit(5)
+			highScoreCelebrated = true
 
 func addDebug(message: String):
 	debugMessages.append(message)

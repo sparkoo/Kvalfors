@@ -36,6 +36,7 @@ config/quit_on_go_back=false
 
 Utils="*res://Utils/utils.gd"
 Game="*res://Game/GameControl.gd"
+ColorPallete="*res://Utils/ColorPallete.gd"
 
 [debug]
 
