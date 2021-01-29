@@ -58,6 +58,7 @@ func _physics_process(delta):
 
 func gameOver():
 	$GameOver/Popup.popup_centered()
+	Game.saveHighScore(distance)
 #	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _input(event):

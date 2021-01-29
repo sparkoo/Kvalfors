@@ -10,6 +10,7 @@ func _ready():
 		if n >= 1:
 			obstacleGenerator.placeObstacles(nextBlock, blockCounter, Game.levelDifficulty)
 	$Gui/PlayGui/Difficulty.text = "Difficulty: %s" % Game.levelDifficulty
+	$Gui/PlayGui.setRecord(Game.getHighScore())
 
 
 func moveGenDetector():
