@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Gui/GameOver.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/models/StartModel.glb" type="PackedScene" id=8]
 [ext_resource path="res://LevelBits/RoadBlock1.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Gui/Fireworks.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sfx/record.ogg" type="AudioStream" id=11]
 
 [node name="LevelTemplate" type="Spatial" groups=[
 "game",
@@ -63,6 +64,10 @@ fov = 55.2
 
 [node name="Fireworks" parent="Env" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 20 )
+
+[node name="NewRecordSfx" type="AudioStreamPlayer" parent="Env"]
+stream = ExtResource( 11 )
+volume_db = -30.0
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )

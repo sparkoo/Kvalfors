@@ -100,8 +100,9 @@ func cleanup():
 func checkHighScore():
 	if distance > Game.getHighScore():
 		$Gui/PlayGui.setRecord(distance)
-		if !highScoreCelebrated:
+		if !highScoreCelebrated and Game.getHighScore() > 0:
 			$Env/Fireworks.emit(5)
+			$Env/NewRecordSfx.play()
 			highScoreCelebrated = true
 
 func addDebug(message: String):
