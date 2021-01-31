@@ -13,9 +13,9 @@ func save(var path : String, var thingToSave):
 
 func loadDictionary(var path : String) -> Dictionary:
 	var file = File.new()
-	if !file.file_exists(path):
+	var openErr = file.open(path, File.READ)
+	if openErr != OK:
 		return {}
-	file.open(path, File.READ)
 	var content = file.get_line()
 	file.close()
 	var parseResult = JSON.parse(content)

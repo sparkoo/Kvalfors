@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/models/UV.material" type="Material" id=1]
 
-[sub_resource type="ArrayMesh" id=2]
+[sub_resource type="ArrayMesh" id=1]
 resource_name = "RoadBlock2Model"
 surfaces/0 = {
 "aabb": AABB( -4.99797, -0.711846, 0, 9.99594, 2.34136, 10 ),
@@ -18,5 +18,5 @@ surfaces/0 = {
 }
 
 [node name="RoadBlock2Model" type="MeshInstance"]
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 material/0 = null
