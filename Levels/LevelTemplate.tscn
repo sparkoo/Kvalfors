@@ -45,16 +45,16 @@ shadow_enabled = true
 directional_shadow_blend_splits = true
 
 [node name="Camera" type="Camera" parent="Env"]
-transform = Transform( -1, 2.41703e-08, -8.4015e-08, -8.5583e-09, 0.929339, 0.369228, 8.70028e-08, 0.369228, -0.929339, 0, 1.89714, -2.14258 )
+transform = Transform( -1, 2.41703e-08, -8.4015e-08, -8.5583e-09, 0.929339, 0.369228, 8.70028e-08, 0.369228, -0.929339, 0, 1.897, -2 )
 environment = ExtResource( 6 )
 current = true
-fov = 55.2
+fov = 102.0
 
 [node name="CamPosDefault" type="Camera" parent="Env"]
-transform = Transform( -1, 2.41703e-08, -8.4015e-08, -8.5583e-09, 0.929339, 0.369228, 8.70028e-08, 0.369228, -0.929339, 0, 1.89714, -2.14258 )
+transform = Transform( -1, 2.41703e-08, -8.4015e-08, -8.5583e-09, 0.929339, 0.369228, 8.70028e-08, 0.369228, -0.929339, 0, 1.897, -2 )
 visible = false
 environment = ExtResource( 6 )
-fov = 55.2
+fov = 102.0
 
 [node name="CamPosTunnel" type="Camera" parent="Env"]
 transform = Transform( -1, -5.65818e-08, 3.20891e-07, 0, 0.984808, 0.173648, -3.25841e-07, 0.173648, -0.984808, 0, 1, -1.5 )
@@ -92,10 +92,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Debug/DebugConsole/CenterContainer"]
-margin_left = 512.0
-margin_top = 283.0
-margin_right = 512.0
-margin_bottom = 316.0
+margin_left = 300.0
+margin_top = 495.0
+margin_right = 300.0
+margin_bottom = 528.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 align = 1
