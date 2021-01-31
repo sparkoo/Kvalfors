@@ -5,4 +5,6 @@ export/android/adb = "/usr/bin/adb"
 export/android/jarsigner = "/usr/bin/jarsigner"
 export/android/custom_build_sdk_path = "/usr/local/lib/android/sdk"
 export/android/debug_keystore = "/tmp/debug.keystore"
+export/android/debug_keystore_user = "androiddebugkey"
+export/android/debug_keystore_pass = "android"
 mono/builds/build_tool = 0
