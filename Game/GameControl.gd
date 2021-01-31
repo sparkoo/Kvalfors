@@ -3,6 +3,7 @@ extends Node
 const HS_DISTANCE = "distance"
 const HS_LEVEL = "endless"
 
+var mainMenu = "res://Gui/MainMenu.tscn"
 var level = "res://Levels/LevelEndless.tscn"
 var levelDifficulty = 8
 
@@ -48,7 +49,7 @@ func _ready():
 	loadHighScores()
 
 func _on_Exit_pressed():
-	exitGame()
+	get_tree().change_scene(mainMenu)
 
 
 func startGame():

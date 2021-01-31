@@ -1,6 +1,9 @@
 extends Particles
 
+class_name FireworksParticles
+
 const SPEED = 10
+var move = true
 
 func _ready():
 	var material = SpatialMaterial.new()
@@ -15,4 +18,5 @@ func _on_Timer_timeout():
 	queue_free()
 
 func _process(delta):
-	translate(Vector3(0, 0, -SPEED * delta))
+	if move:
+		translate(Vector3(0, 0, -SPEED * delta))

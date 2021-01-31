@@ -61,6 +61,14 @@ func _physics_process(delta):
 
 func gameOver():
 	$GameOver/Popup.popup_centered()
+	if Game.isNewRecord(distance):
+		$GameOver/Popup/CenterContainer/VBoxContainer/GameOver.text = "New Record!!!"
+		$GameOver/Popup/CenterContainer/VBoxContainer/Label.text = "%s m" % int(distance)
+		$Env/Fireworks.emit(5, false)
+		$Env/NewRecordSfx.play()
+	else:
+		$GameOver/Popup/CenterContainer/VBoxContainer/GameOver.text = "Game Over"
+		$GameOver/Popup/CenterContainer/VBoxContainer/Label.text = ""
 	Game.saveHighScore(distance)
 #	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 

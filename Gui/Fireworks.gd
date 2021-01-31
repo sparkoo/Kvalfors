@@ -3,14 +3,17 @@ extends Spatial
 var particles = load("res://GUI/FireworksParticles.tscn")
 
 var emitting = false
+var move = true
 
-func emit(period: int):
+func emit(period: int, shouldMove: bool = true):
 	emitting = true
+	move = shouldMove
 	$EmitTimer.start(period)
 
 func _on_Timer_timeout():
 	if emitting:
-		var newParticles = particles.instance()
+		var newParticles: FireworksParticles = particles.instance()
+		newParticles.move = move
 		add_child(newParticles)
 		var x = randi() % 4 - 2
 		var y = randi() % 4 - 2
