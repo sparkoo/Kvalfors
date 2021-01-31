@@ -17,9 +17,7 @@ jobs:
     - name: generate android keystore
       run: |
         keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999 -deststoretype pkcs12
-        chmod 777 debug.keystore
         mv debug.keystore /tmp/debug.keystore
-        ls /tmp
     - name: checkout
       uses: actions/checkout@v2.3.1
       with:
@@ -28,8 +26,6 @@ jobs:
       run: |
         mkdir -p ~/.config/godot
         cp /home/runner/work/Kvalfors/Kvalfors/.github/config/editor_settings-3.tres ~/.config/godot/editor_settings-3.tres
-        ls /tmp
-        ls ~/.config/godot
     - name: get tag from version
       id: tag_version
       run: |
