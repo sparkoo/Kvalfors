@@ -63,22 +63,24 @@ func saveConfig():
 	Utils.save("user://config.json", config)
 
 func loadConfig():
-	config = Utils.loadDictionary("user://config.json")
+	var storedConfig = Utils.loadDictionary("user://config.json")
+	if storedConfig.size() > 0:
+		config = storedConfig
 	levelDifficulty = config.levelDifficulty
 	setDifficulty(levelDifficulty)
 
 func loadHighScores():
 	var loaded = Utils.loadDictionary("user://highScores.json")
-	if loaded != null:
+	if loaded.size() > 0:
 		highScores = loaded
 
 func isNewRecord(score: int):
-	return score > highScores[HS_LEVEL][levelDifficulty][HS_DISTANCE]
+	return score > highScores[HS_LEVEL][str(levelDifficulty)][HS_DISTANCE]
 
 func saveHighScore(newScore: int):
-	var currentScore = highScores[HS_LEVEL][levelDifficulty][HS_DISTANCE]
+	var currentScore = highScores[HS_LEVEL][str(levelDifficulty)][HS_DISTANCE]
 	if isNewRecord(newScore):
-		highScores[HS_LEVEL][levelDifficulty][HS_DISTANCE] = newScore
+		highScores[HS_LEVEL][str(levelDifficulty)][HS_DISTANCE] = newScore
 		Utils.save("user://highScores.json", highScores)
 
 func _on_TryAgain_pressed():
@@ -104,8 +106,8 @@ func setDifficulty(newValue: int):
 
 func getHighScore() -> int:
 	if highScores.has(HS_LEVEL):
-		if highScores[HS_LEVEL].has(levelDifficulty):
-			if highScores[HS_LEVEL][levelDifficulty].has(HS_DISTANCE):
-				return highScores[HS_LEVEL][levelDifficulty][HS_DISTANCE]
+		if highScores[HS_LEVEL].has(str(levelDifficulty)):
+			if highScores[HS_LEVEL][str(levelDifficulty)].has(HS_DISTANCE):
+				return highScores[HS_LEVEL][str(levelDifficulty)][HS_DISTANCE]
 	
 	return 0

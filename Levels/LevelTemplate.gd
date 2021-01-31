@@ -64,7 +64,8 @@ func gameOver():
 	if Game.isNewRecord(distance):
 		$GameOver/Popup/CenterContainer/VBoxContainer/GameOver.text = "New Record!!!"
 		$GameOver/Popup/CenterContainer/VBoxContainer/Label.text = "%s m" % int(distance)
-		$Env/Fireworks.emit(5, false)
+		$Env/Fireworks.emit(-1, false)
+		$Env/Fireworks.translate(Vector3(0, -1, -15))
 		$Env/NewRecordSfx.play()
 	else:
 		$GameOver/Popup/CenterContainer/VBoxContainer/GameOver.text = "Game Over"

@@ -8,7 +8,10 @@ var move = true
 func emit(period: int, shouldMove: bool = true):
 	emitting = true
 	move = shouldMove
-	$EmitTimer.start(period)
+	if period > 0:
+		$EmitTimer.start(period)
+	else:
+		$EmitTimer.stop()
 
 func _on_Timer_timeout():
 	if emitting:
@@ -24,4 +27,5 @@ func _on_Timer_timeout():
 
 
 func _on_EmitTimer_timeout():
+	print("ende slus")
 	emitting = false
