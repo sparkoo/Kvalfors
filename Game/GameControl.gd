@@ -14,31 +14,31 @@ var config = {
 
 var highScores = {
 	HS_LEVEL: {
-		0: {
+		"0": {
 			HS_DISTANCE: 0
 		},
-		1: {
+		"1": {
 			HS_DISTANCE: 0
 		},
-		2: {
+		"2": {
 			HS_DISTANCE: 0
 		},
-		3: {
+		"3": {
 			HS_DISTANCE: 0
 		},
-		4: {
+		"4": {
 			HS_DISTANCE: 0
 		},
-		5: {
+		"5": {
 			HS_DISTANCE: 0
 		},
-		6: {
+		"6": {
 			HS_DISTANCE: 0
 		},
-		7: {
+		"7": {
 			HS_DISTANCE: 0
 		},
-		8: {
+		"8": {
 			HS_DISTANCE: 0
 		}
 	}
