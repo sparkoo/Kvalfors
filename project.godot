@@ -53,7 +53,6 @@ settings/stdout/print_fps=true
 window/size/width=800
 window/size/height=1280
 window/size/resizable=false
-window/size/fullscreen=true
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
