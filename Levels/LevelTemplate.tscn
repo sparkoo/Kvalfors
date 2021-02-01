@@ -41,7 +41,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Env"]
 transform = Transform( 0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 0, 4.3759, 0.57997 )
-shadow_enabled = true
 directional_shadow_blend_splits = true
 
 [node name="Camera" type="Camera" parent="Env"]
@@ -92,10 +91,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Debug/DebugConsole/CenterContainer"]
-margin_left = 300.0
-margin_top = 495.0
-margin_right = 300.0
-margin_bottom = 528.0
+margin_left = 400.0
+margin_top = 623.0
+margin_right = 400.0
+margin_bottom = 656.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 align = 1

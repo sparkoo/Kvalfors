@@ -50,12 +50,14 @@ settings/stdout/print_fps=true
 
 [display]
 
-window/size/width=600
-window/size/height=1024
+window/size/width=800
+window/size/height=1280
+window/size/resizable=false
+window/size/fullscreen=true
 window/vsync/use_vsync=false
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_width"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -118,4 +120,14 @@ diffMinus={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+quality/directional_shadow/size.mobile=512
+quality/shadow_atlas/size.mobile=512
+quality/reflections/irradiance_max_size=64
+quality/filters/use_nearest_mipmap_filter=true
+quality/reflections/atlas_size=1024
+quality/reflections/atlas_subdiv=32
 environment/default_environment="res://default_env.tres"
+quality/filters/anisotropic_filter_level=1
+quality/subsurface_scattering/quality=0

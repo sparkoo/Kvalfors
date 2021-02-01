@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.s3tc.stex"
 path.etc2="res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.etc2.stex"
+path.etc="res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/gfx/Road007_1K_Color.png"
-dest_files=[ "res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.s3tc.stex", "res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.etc2.stex" ]
+dest_files=[ "res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.s3tc.stex", "res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.etc2.stex", "res://.import/Road007_1K_Color.png-3564d703760c1393a393e2c478c64477.etc.stex" ]
 
 [params]
 
