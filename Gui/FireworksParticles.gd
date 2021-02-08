@@ -10,7 +10,7 @@ func _ready():
 	var color = ColorPallete.randomColor()
 	material.albedo_color = color
 	material.emission_enabled = true
-	material.emission_energy = 15
+	material.emission_energy = 5
 	material.emission = color
 	set_material_override(material)
 
