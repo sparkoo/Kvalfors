@@ -6,6 +6,7 @@ onready var highScoreLabel = $CanvasLayer/CenterContainer/VBoxContainer/HighScor
 func _ready():
 	difficultyLabel.text = String(Game.levelDifficulty)
 	highScoreLabel.text = "High Score: %s" % Game.getHighScore()
+	Soundtrack.playMenu()
 
 
 func _on_Start_pressed():

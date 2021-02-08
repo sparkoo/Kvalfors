@@ -5,7 +5,7 @@ const FLOAT_EPSILON = 0.00001
 static func compare_floats(a, b, epsilon = FLOAT_EPSILON):
 	return abs(a - b) <= epsilon
 
-func save(var path : String, var thingToSave):
+func save(path: String, thingToSave):
 	print("saving %s" % path)
 	var file = File.new()
 	var openErr = file.open(path, File.WRITE)
@@ -14,7 +14,7 @@ func save(var path : String, var thingToSave):
 	file.store_line(JSON.print(thingToSave))
 	file.close()
 
-func loadDictionary(var path : String) -> Dictionary:
+func loadDictionary(path: String) -> Dictionary:
 	var file = File.new()
 	var openErr = file.open(path, File.READ)
 	if openErr != OK:

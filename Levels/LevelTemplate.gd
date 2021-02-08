@@ -45,6 +45,7 @@ func _ready():
 		get_tree().debug_collisions_hint = true
 	moveCamera(cameraDefaultPosition)
 	$Player.start()
+	Soundtrack.playGame()
 
 func _physics_process(delta):
 	if player.playerState == player.PlayerState.RUNNING:
@@ -83,8 +84,6 @@ func _input(event):
 	if event.is_action_pressed("diffMinus"):
 		get_tree().call_group("level", "updateDifficultyBy", -1)
 
-func gameStateChanged(newstate):
-	print("hohoho")
 
 func generateNext() -> StaticBody:
 	blockCounter += 1
@@ -101,10 +100,12 @@ func generateNext() -> StaticBody:
 	
 	return nextBlock
 
+
 func cleanup():
 	var blockToDelete : Node = roadBlocks.get_children()[0]
 	roadBlocks.remove_child(blockToDelete)
 	blockToDelete.queue_free()
+
 
 func checkHighScore():
 	if distance > Game.getHighScore():
@@ -113,6 +114,7 @@ func checkHighScore():
 			$Env/Fireworks.emit(5)
 			$Env/NewRecordSfx.play()
 			highScoreCelebrated = true
+
 
 func addDebug(message: String):
 	debugMessages.append(message)
