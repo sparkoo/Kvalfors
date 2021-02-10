@@ -2,12 +2,19 @@ extends Spatial
 
 onready var difficultyLabel = $CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/Difficulty
 onready var highScoreLabel = $CanvasLayer/CenterContainer/VBoxContainer/HighScore
+onready var controlsButton = $CanvasLayer/CenterContainer/VBoxContainer/Controls
 
 func _ready():
 	difficultyLabel.text = String(Game.levelDifficulty)
 	highScoreLabel.text = "High Score: %s" % Game.getHighScore()
 	Soundtrack.playMenu()
+	initControlsButton()
 
+
+func initControlsButton():
+	controlsButton.add_item("Classic")
+	controlsButton.add_item("Centralized")
+	controlsButton.select(Game.getControlsIndex())
 
 func _on_Start_pressed():
 	Game.startGame()
@@ -30,3 +37,10 @@ func _on_DifficultyDown_pressed():
 
 func _on_Exit_pressed():
 	Game.exitGame()
+
+
+func _on_Controls_item_selected(index):
+	if index == 1:
+		Game.setControls(Game.ControlTypes.CENTRALIZED)
+	else:
+		Game.setControls(Game.ControlTypes.CLASSIC)

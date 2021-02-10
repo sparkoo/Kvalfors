@@ -45,9 +45,15 @@ func move(delta: float):
 func handleSideMoves(delta):
 	# allow change lines only when running
 	if playerActiveState == PlayerActiveState.RUNNING and is_on_floor():
-		currentLine = Input.get_action_strength("left") - Input.get_action_strength("right")
+		currentLine = calcCurrentLine()
 	
 	motion.x = moveToMotion(translation.x, LINE_WIDTH * currentLine, SIDE_SPEED, delta)
+
+func calcCurrentLine():
+	if Game.getControls() == Game.ControlTypes.CLASSIC:
+		return 0
+	else:
+		return Input.get_action_strength("left") - Input.get_action_strength("right")
 
 func handleVerticalMoves(delta):
 	if !is_on_floor():

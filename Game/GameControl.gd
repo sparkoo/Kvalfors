@@ -1,15 +1,20 @@
 extends Node
 
+enum ControlTypes{CLASSIC, CENTRALIZED}
+
 const HS_DISTANCE = "distance"
 const HS_LEVEL = "endless"
+
 
 var mainMenu = "res://Gui/MainMenu.tscn"
 var level = "res://Levels/LevelEndless.tscn"
 var levelDifficulty = 8
+var controls = ControlTypes.CLASSIC
 
 var config = {
 	"level": level,
-	"levelDifficulty": levelDifficulty
+	"levelDifficulty": levelDifficulty,
+	"controls": controls
 }
 
 var highScores = {
@@ -68,6 +73,11 @@ func loadConfig():
 		config = storedConfig
 	levelDifficulty = config.levelDifficulty
 	setDifficulty(levelDifficulty)
+	if storedConfig.has("controls"):
+		if storedConfig.get("controls") == 1:
+			controls = ControlTypes.CENTRALIZED
+		else:
+			controls = ControlTypes.CLASSIC
 
 func loadHighScores():
 	var loaded = Utils.loadDictionary("user://highScores.json")
@@ -90,8 +100,10 @@ func _on_TryAgain_pressed():
 func updateDifficultyTo(newDifficulty: int):
 	setDifficulty(newDifficulty)
 
+
 func updateDifficultyBy(step: int):
 	setDifficulty(levelDifficulty + step)
+
 
 func setDifficulty(newValue: int):
 	if newValue < 0:
@@ -104,6 +116,13 @@ func setDifficulty(newValue: int):
 	config.levelDifficulty = levelDifficulty
 	saveConfig()
 
+
+func setControls(newControls):
+	config.controls = newControls
+	controls = newControls
+	saveConfig()
+
+
 func getHighScore() -> int:
 	if highScores.has(HS_LEVEL):
 		if highScores[HS_LEVEL].has(str(levelDifficulty)):
@@ -111,3 +130,11 @@ func getHighScore() -> int:
 				return highScores[HS_LEVEL][str(levelDifficulty)][HS_DISTANCE]
 	
 	return 0
+
+
+func getControls():
+	return controls
+
+
+func getControlsIndex():
+	return config.controls
