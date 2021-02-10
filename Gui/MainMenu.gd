@@ -13,7 +13,7 @@ func _ready():
 
 func initControlsButton():
 	controlsButton.add_item("Classic")
-	controlsButton.add_item("Centralized")
+	controlsButton.add_item("Dancepad")
 	controlsButton.select(Game.getControlsIndex())
 
 func _on_Start_pressed():
