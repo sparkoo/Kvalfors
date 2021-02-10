@@ -1,8 +1,8 @@
 extends Spatial
 
-onready var difficultyLabel = $CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/Difficulty
+onready var difficultyLabel = $CanvasLayer/CenterContainer/VBoxContainer/HBoxDifficulty/Difficulty
 onready var highScoreLabel = $CanvasLayer/CenterContainer/VBoxContainer/HighScore
-onready var controlsButton = $CanvasLayer/CenterContainer/VBoxContainer/Controls
+onready var controlsButton = $CanvasLayer/CenterContainer/VBoxContainer/HBoxControls/Controls
 
 func _ready():
 	difficultyLabel.text = String(Game.levelDifficulty)
