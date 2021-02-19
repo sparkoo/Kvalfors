@@ -18,7 +18,7 @@ func playMenu():
 	play(menuSoundtrack)
 
 func playGame():
-	play(playSoundtrack[playSoundtrackCurrentI])
+	play(playSoundtrack[playSoundtrackCurrentI % playSoundtrack.size()])
 	playSoundtrackCurrentI += 1
 
 func play(res: Resource):
