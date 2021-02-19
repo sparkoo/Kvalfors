@@ -23,7 +23,7 @@ func _on_Timer_timeout():
 		var z = randi() % 4 - 2
 		newParticles.translate(Vector3(x, y, z))
 		newParticles.emitting = true
-		$Timer.wait_time = rand_range(0.1, 0.5)
+		$Timer.wait_time = rand_range(0.5, 1)
 
 
 func _on_EmitTimer_timeout():
