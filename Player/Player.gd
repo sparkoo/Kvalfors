@@ -16,6 +16,10 @@ const LINE_WIDTH = 1
 const UP = Vector3(0, 1, 0)
 var motion = Vector3()
 const G = -.25
+const DRAG_DIRECTION_MARGIN = 5
+const DRAG_SPEED = 1
+var dragMoved = false
+var currentTouchAction = "void"
 
 var playerState = PlayerState.IDLE
 var playerActiveState = PlayerActiveState.RUNNING
@@ -38,27 +42,66 @@ func _physics_process(delta: float):
 	move_and_slide(motion, UP, true)	# stop on slope false to stop Z movement
 
 func move(delta: float):
-	handleSideMoves(delta)
-	handleVerticalMoves(delta)
-	motion.z = -global_transform.origin.z	# autocorrect Z
-
-func handleSideMoves(delta):
-	# allow change lines only when running
-	if playerActiveState == PlayerActiveState.RUNNING and is_on_floor():
-		calcCurrentLine()
-	
+	# side movment
 	motion.x = moveToMotion(translation.x, LINE_WIDTH * currentLine, SIDE_SPEED, delta)
 
-func calcCurrentLine():
+	handleVerticalMoves()
+
+	motion.z = -global_transform.origin.z	# autocorrect Z
+
+func _input(event):
+	handleTouchEvents(event)
+	# allow change lines only when running
+	if playerActiveState == PlayerActiveState.RUNNING and is_on_floor():
+		calcCurrentLine(event)
+
+func handleTouchEvents(event: InputEvent):
+	if not dragMoved and event is InputEventScreenDrag:
+		var drag = event.relative
+		# side movement
+		if drag.y >= -DRAG_DIRECTION_MARGIN and drag.y <= DRAG_DIRECTION_MARGIN:
+			dragMoved = true
+			var a = InputEventAction.new()
+			a.pressed = true
+			if drag.x >= DRAG_SPEED:
+				currentTouchAction = "right"
+			elif drag.x <= -DRAG_SPEED:
+				currentTouchAction = "left"
+			a.action = currentTouchAction
+			Input.parse_input_event(a)
+		elif drag.x >= -DRAG_DIRECTION_MARGIN and drag.x <= DRAG_DIRECTION_MARGIN * 2:
+			dragMoved = true
+			var a = InputEventAction.new()
+			a.pressed = true
+			if drag.y >= DRAG_SPEED:
+				currentTouchAction = "slide"
+			elif drag.y <= -DRAG_SPEED:
+				currentTouchAction = "jump"
+			a.action = currentTouchAction
+			Input.parse_input_event(a)
+	
+	if event is InputEventScreenTouch:
+		if not event.is_pressed():
+			dragMoved = false
+
+			# release action
+			if currentTouchAction != null:
+				var a = InputEventAction.new()
+				a.pressed = false
+				a.action = currentTouchAction
+				Input.parse_input_event(a)
+				currentTouchAction = "void"
+
+func calcCurrentLine(event: InputEvent):
 	if Game.getControls() == Game.ControlTypes.CLASSIC:
-		if Input.is_action_just_pressed("left") and currentLine <= 0:
+		if event.is_action_pressed("left") and currentLine <= 0:
 			currentLine += 1
-		elif Input.is_action_just_pressed("right") and currentLine >= 0:
+		elif event.is_action_pressed("right") and currentLine >= 0:
 			currentLine -= 1
 	else:
-		currentLine = Input.get_action_strength("left") - Input.get_action_strength("right")
+		currentLine = event.get_action_strength("left") - event.get_action_strength("right")
 
-func handleVerticalMoves(delta):
+func handleVerticalMoves():
 	if !is_on_floor():
 		motion.y += G
 	elif Input.is_action_just_pressed("jump") and playerActiveState == PlayerActiveState.RUNNING:
