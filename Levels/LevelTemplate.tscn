@@ -102,10 +102,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Debug/DebugConsole/CenterContainer"]
-margin_left = 400.0
-margin_top = 623.0
-margin_right = 400.0
-margin_bottom = 656.0
+margin_left = 320.0
+margin_top = 495.0
+margin_right = 320.0
+margin_bottom = 528.0
 grow_horizontal = 2
 theme = ExtResource( 7 )
 align = 1

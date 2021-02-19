@@ -48,13 +48,12 @@ Soundtrack="*res://Game/Soundtrack.tscn"
 [debug]
 
 settings/stdout/print_fps=true
+settings/stdout/verbose_stdout=true
 
 [display]
 
-window/size/width=800
-window/size/height=1280
-window/size/fullscreen=true
-window/vsync/use_vsync=false
+window/size/width=640
+window/size/height=1024
 window/handheld/orientation="portrait"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"

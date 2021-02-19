@@ -1,12 +1,12 @@
 extends Node
 
-var menuSoundtrack = load("res://assets/soundtrack/Crowander - Crash.ogg")
+var menuSoundtrack = load("res://assets/soundtrack/menu1.ogg")
 var playSoundtrack = [
-	load("res://assets/soundtrack/Anamanaguchi - Fast Turtle.ogg"),
-	load("res://assets/soundtrack/Andrew Codeman - Run.ogg"),
-	load("res://assets/soundtrack/Büromaschinen - Run.ogg"),
-	load("res://assets/soundtrack/Lloyd Rodgers - 1 - Fast.ogg"),
-	load("res://assets/soundtrack/Pistol Jazz - God Speed (instrumental version).ogg")
+	load("res://assets/soundtrack/game1.ogg"),
+	load("res://assets/soundtrack/game2.ogg"),
+	load("res://assets/soundtrack/game3.ogg"),
+	load("res://assets/soundtrack/game4.ogg"),
+	load("res://assets/soundtrack/game5.ogg")
 ]
 var playSoundtrackCurrentI = 0
 
